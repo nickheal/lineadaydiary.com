@@ -8,7 +8,7 @@ import Button from './Button';
 // }
 
 const StyledForm = styled.form`
-  margin-bottom: 32px;
+  margin-bottom: 60px;
   text-align: center;
 `;
 

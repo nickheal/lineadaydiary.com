@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'gatsby';
+import { useIdentityContext } from 'react-netlify-identity';
 import { styled } from '../theme/index';
+import Button from '../components/Button';
+import LoginPopup from './LoginPopup';
 
 const StyledNav = styled.nav`
   display: flex;
@@ -14,7 +17,7 @@ const StyledLink = styled(Link)`
   color: #333;
   font-family: ${props => props.theme.typography.fontFamily};
   font-size: 16px;
-  padding: 16px;
+  padding: 13px 24px;
   text-decoration: none;
   transition: background-color 100ms ease-in-out;
 
@@ -24,11 +27,17 @@ const StyledLink = styled(Link)`
 `;
 
 export default function Layout() {
+  const { isLoggedIn } = useIdentityContext();
+
+  const [loginPopup, setLoginPopup] = useState(false);
+  
   return (
     <StyledNav>
       <StyledLink to="/">Home</StyledLink>
-      <StyledLink to="/write">Write</StyledLink>
+      {isLoggedIn ? <StyledLink to="/write">Write</StyledLink> : null}
       <StyledLink to="/about">About</StyledLink>
+      {isLoggedIn ? null : <Button onClick={() => setLoginPopup(true)}>Log in</Button>}
+      {loginPopup ? <LoginPopup /> : null}
     </StyledNav>
   );
 }

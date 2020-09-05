@@ -7,10 +7,10 @@ export default styled.button`
   color: #333;
   cursor: pointer;
   font-size: 16px;
-  padding: 16px 24px;
+  padding: 13px 24px;
   transition: background-color 100ms ease-in-out;
 
-  &:hover {
+  &:hover, &:focus {
     background-color: ${props => props.theme.palette.primaryHover};
   }
 `;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // import { styled } from '../theme/index';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
@@ -7,7 +7,7 @@ import RecordForm from '../components/RecordForm';
 import Timeline from '../components/Timeline';
 
 export default function Write() {
-  const activeDate = new Date();
+  const [date, setDate] = useState(new Date());
 
   const years: RecordProps[] = [{
     content: 'Went for a walk. Met up with the family. Had noodles for dinner.',
@@ -20,12 +20,12 @@ export default function Write() {
     year: 2017
   }];
 
-  console.log(activeDate.getFullYear(), years);
+  console.log(date.getFullYear(), years);
 
   return (
     <Layout>
+      <Timeline date={date} onChange={setDate} />
       <Container>
-        <Timeline />
         <RecordForm />
         {years.map(Record)}
       </Container>
