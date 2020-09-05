@@ -1,5 +1,5 @@
 import React from 'react';
-import { useIdentityContext } from 'react-netlify-identity';
+import { useIdentityContext } from 'react-netlify-identity-widget';
 import { styled } from '../theme/index';
 import Button from './Button';
 import Input from './Input';

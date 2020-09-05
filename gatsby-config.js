@@ -11,5 +11,5 @@ module.exports = {
     options: {
       url: 'https://serene-meninsky-c44e32.netlify.app'
     }
-  }],
+  }]
 }

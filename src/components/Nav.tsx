@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
-import { useIdentityContext } from 'react-netlify-identity';
+import { useIdentityContext } from 'react-netlify-identity-widget';
 import { styled } from '../theme/index';
 import Button from '../components/Button';
 import LoginPopup from './LoginPopup';
