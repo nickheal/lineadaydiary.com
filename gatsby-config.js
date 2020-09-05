@@ -6,5 +6,10 @@
 
 module.exports = {
   /* Your site config here */
-  plugins: [],
+  plugins: [{
+    resolve: 'gatsby-plugin-netlify-identity',
+    options: {
+      url: 'https://serene-meninsky-c44e32.netlify.app'
+    }
+  }],
 }

@@ -1,6 +1,11 @@
 import React from 'react';
 import { useIdentityContext } from 'react-netlify-identity';
 import { styled } from '../theme/index';
+import Button from './Button';
+import Input from './Input';
+import Label from './Label';
+import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
 
 const StyledContainer = styled.div`
   background-color: rgba(0, 0, 0, 0.5);
@@ -22,29 +27,11 @@ const StyledWrapper = styled.div`
 `;
 
 export default function LoginPopup() {
-  const { loginUser } = useIdentityContext();
-
-  function onSubmit(e: React.SyntheticEvent) {
-    e.preventDefault()
-    const target = e.target as typeof e.target & { email: { value: string }; password: { value: string } }
-    const email = target.email.value
-    const password = target.password.value
-    loginUser(email, password, true)
-      .then((user) => {
-        if (process.env.NODE_ENV !== 'production') console.log('Success! Logged in', user)
-        // if (onLogin) onLogin(user)
-      })
-      // .catch((err) => void console.error(err) || setMsg('Error: ' + err.message))
-  }
-
   return (
     <StyledContainer>
       <StyledWrapper>
-        <form onSubmit={onSubmit}>
-          <input name="email" />
-          <input name="password" />
-          <button>Log in</button>
-        </form>
+        <LoginForm />
+        <SignUpForm />
       </StyledWrapper>
     </StyledContainer>
   );
