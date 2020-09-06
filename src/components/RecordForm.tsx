@@ -1,4 +1,5 @@
 import React from 'react';
+import { useIdentityContext } from 'react-netlify-identity-widget';
 import { styled } from '../theme/index';
 import Button from './Button';
 
@@ -46,6 +47,10 @@ const StyledTextArea = styled.textarea`
 `;
 
 export default function Record() {
+  const { user } = useIdentityContext();
+
+  console.log(user);
+
   function onSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
     fetch('/.netlify/functions-dist/owner-records', {

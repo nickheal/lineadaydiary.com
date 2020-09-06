@@ -1,27 +1,86 @@
-/* code from functions/todos-read.js */
-import faunadb from 'faunadb';
-import getId from './utils/getId';
+import faunadb from "faunadb";
 
-const q = faunadb.query
+/* configure faunaDB Client with our secret */
+const q = faunadb.query;
+// client needs to be mutable so it can dynamically re-initialise when a new user logs in.
 const client = new faunadb.Client({
-  secret: process.env.FAUNADB_SECRET
-})
+  secret: store.getters["auth/currentUser"].app_metadata.db_token
+});
 
-exports.handler = (event, context, callback) => {
-  const id = getId(event.path)
-  console.log(`Function 'todo-read' invoked. Read id: ${id}`)
-  return client.query(q.Get(q.Ref(`classes/todos/${id}`)))
-  .then((response) => {
-    console.log("success", response)
-    return callback(null, {
-      statusCode: 200,
-      body: JSON.stringify(response)
+/**
+ *
+ * @param {object} journalData - object containing the title of journal, could contain other data too in the future
+ */
+export function createJournal(journalData) {
+  const me = q.Identity();
+
+  return client
+    .query(
+      q.Create(q.Collection("journals"), {
+        data: {
+          ...journalData,
+          owner: me
+        },
+        permissions: {
+          read: me,
+          write: me
+        }
+      })
+    )
+    .then(resp => resp)
+    .catch(error => error);
+}
+
+export function getJournals() {
+  return client
+    .query(
+      q.Map(q.Paginate(q.Match(q.Ref("indexes/all_journals"))), ref =>
+        q.Get(ref)
+      )
+    )
+    .then(resp => resp);
+}
+
+/**
+ *
+ * @param {object} journal - Fauna journal object
+ */
+export function deleteJournal(journal) {
+  return client
+    .query(
+      q.Map(
+        q.Paginate(
+          q.Match(
+            // get all the posts within a given journal ref
+            q.Index("posts_by_journal"),
+            q.Ref(q.Collection("journals"), journal.ref.value.id)
+          )
+        ),
+        // then delete all of the posts within that given journal ref,
+        // I used a FQL Lambda here because i couldn't get an inline arrow function to work
+        q.Lambda("X", q.Delete(q.Select("ref", q.Get(q.Var("X")))))
+      )
+    )
+    .then(() => {
+      // Once all of the posts in that given journals have been removed we delete the journal itself
+      return client.query(q.Delete(journal.ref));
     })
-  }).catch((error) => {
-    console.log("error", error)
-    return callback(null, {
-      statusCode: 400,
-      body: JSON.stringify(error)
-    })
-  })
+    .catch(err => err);
+}
+
+/**
+ *
+ * @param {object} journalRefID - faunaDb journal collection reference ID
+ * @param {string} newTitle - new title for journal
+ */
+export function updateJournalTitle(journalRefID, newTitle) {
+  return client
+    .query(
+      q.Update(q.Ref(q.Collection("journals"), journalRefID), {
+        //TODO - should think about spreading a journal object into here. See createJournal method.
+        data: { title: newTitle }
+      })
+    )
+    .then(resp => resp)
+    .catch(err => err);
 }
