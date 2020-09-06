@@ -4,7 +4,13 @@ import Button from '../components/Button';
 import Input from '../components/Input';
 import Label from '../components/Label';
 
-export default function LoginPopup() {
+interface Props {
+  onLogIn: () => void
+}
+
+export default function LoginPopup({
+  onLogIn
+}: Props) {
   const { loginUser } = useIdentityContext();
 
   function onSubmit(e: React.SyntheticEvent) {
@@ -15,7 +21,7 @@ export default function LoginPopup() {
     loginUser(email, password, true)
       .then((user) => {
         if (process.env.NODE_ENV !== 'production') console.log('Success! Logged in', user)
-        // if (onLogin) onLogin(user)
+        onLogIn();
       })
       // .catch((err) => void console.error(err) || setMsg('Error: ' + err.message))
   }

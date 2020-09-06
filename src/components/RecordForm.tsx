@@ -46,8 +46,25 @@ const StyledTextArea = styled.textarea`
 `;
 
 export default function Record() {
+  function onSubmit(e: React.SyntheticEvent) {
+    e.preventDefault();
+    fetch('/.netlify/functions-dist/owner-records', {
+      body: JSON.stringify({
+        title: 'My todo title',
+        completed: false,
+      }),
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: 'POST'
+    }).then(response => {
+      return response.json()
+    });
+  }
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={onSubmit}>
       <StyledLegend>Write a note about today</StyledLegend>
       <StyledTextArea maxLength={250} />
       <Button>Submit</Button>

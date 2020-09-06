@@ -1,9 +1,5 @@
 import React from 'react';
-import { useIdentityContext } from 'react-netlify-identity-widget';
 import { styled } from '../theme/index';
-import Button from './Button';
-import Input from './Input';
-import Label from './Label';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
 
@@ -26,12 +22,18 @@ const StyledWrapper = styled.div`
   transform: translate(-50%, -50%);
 `;
 
-export default function LoginPopup() {
+interface Props {
+  onClose: () => void
+}
+
+export default function LoginPopup({
+  onClose
+}: Props) {
   return (
     <StyledContainer>
       <StyledWrapper>
-        <LoginForm />
-        <SignUpForm />
+        <LoginForm onLogIn={onClose} />
+        <SignUpForm onSignUp={onClose} />
       </StyledWrapper>
     </StyledContainer>
   );

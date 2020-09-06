@@ -27,7 +27,7 @@ const StyledLink = styled(Link)`
 `;
 
 export default function Layout() {
-  const { isLoggedIn } = useIdentityContext();
+  const { isLoggedIn, logoutUser } = useIdentityContext();
 
   const [loginPopup, setLoginPopup] = useState(false);
   
@@ -37,7 +37,8 @@ export default function Layout() {
       {isLoggedIn ? <StyledLink to="/write">Write</StyledLink> : null}
       <StyledLink to="/about">About</StyledLink>
       {isLoggedIn ? null : <Button onClick={() => setLoginPopup(true)}>Log in</Button>}
-      {loginPopup ? <LoginPopup /> : null}
+      {isLoggedIn ? <Button onClick={() => logoutUser()}>Log out</Button> : null}
+      {loginPopup ? <LoginPopup onClose={() => setLoginPopup(false)} /> : null}
     </StyledNav>
   );
 }
