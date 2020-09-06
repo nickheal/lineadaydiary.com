@@ -12,7 +12,7 @@ if (!process.env.FAUNADB_SERVER_SECRET) {
   console.log(chalk.yellow('Required FAUNADB_SERVER_SECRET enviroment variable not found.'))
   if (insideNetlify) {
     console.log(`Visit https://app.netlify.com/sites/YOUR_SITE_HERE/settings/deploys`)
-    console.log('and set a `FAUNADB_SERVER_SECRET` value in the "Build environment variables" section')
+    console.log('and set a `FAUNADB_SERVER_SECRET` value in the \'Build environment variables\' section')
     process.exit(1)
   }
   // Local machine warning
@@ -47,12 +47,12 @@ function createFaunaDB(key) {
   });
 
   /* Based on your requirements, change the schema here */
-  return client.query(q.Create(q.Ref("classes"), { name: "records" }))
+  const createUsersDB = client.query(q.Create(q.Ref('classes'), { name: 'users' }))
     .then(()=>{
       return client.query(
-        q.Create(q.Ref("indexes"), {
-          name: "owner_records",
-          source: q.Ref("classes/records"),
+        q.Create(q.Ref('indexes'), {
+          name: 'owner_records',
+          source: q.Ref('classes/records'),
           terms: {
             field: ['owner']
           }
@@ -63,7 +63,29 @@ function createFaunaDB(key) {
         console.log('DB already exists')
         throw e
       }
-    })
+    });
+  const createRecordsDB = client.query(q.Create(q.Ref('classes'), { name: 'records' }))
+    .then(()=>{
+      return client.query(
+        q.Create(q.Ref('indexes'), {
+          name: 'owner_records',
+          source: q.Ref('classes/records'),
+          terms: {
+            field: ['owner']
+          }
+        }))
+    }).catch((e) => {
+      // Database already exists
+      if (e.requestResult.statusCode === 400 && e.message === 'instance not unique') {
+        console.log('DB already exists')
+        throw e
+      }
+    });
+  
+  return Promise.all([
+    createUsersDB,
+    createRecordsDB
+  ]);
 }
 
 
