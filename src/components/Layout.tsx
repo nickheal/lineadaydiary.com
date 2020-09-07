@@ -1,6 +1,7 @@
 import React from 'react';
 import { Global, css } from '@emotion/core';
 import { ThemeProvider } from 'emotion-theming';
+import { Helmet } from 'react-helmet';
 import Nav from './Nav';
 import theme, { styled } from '../theme/index';
 
@@ -24,7 +25,7 @@ const StyledMain = styled.main`
 `;
 
 const StyledFooter = styled.footer`
-  color: #777;
+  color: #555;
   font-family: ${props => props.theme.typography.fontFamily};
   font-size: 12px;
   padding: 32px;
@@ -36,6 +37,10 @@ export default function Layout({
 }: Props) {
   return (
     <ThemeProvider theme={theme}>
+      <Helmet
+        htmlAttributes={{ lang: 'en-gb' }}
+        title="lineaday.com. Write for you."
+      />
       <Global styles={globalStyles} />
       <Nav />
       <StyledMain>
