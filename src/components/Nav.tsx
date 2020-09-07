@@ -1,9 +1,11 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import { useIdentityContext } from 'react-netlify-identity-widget';
+import { FiLogIn, FiLogOut, FiPenTool } from 'react-icons/fi';
 import { styled } from '../theme/index';
-import Button from '../components/Button';
+import Button from './Button';
 import LoginPopup from './LoginPopup';
+import StyledIconAndText from './StyledIconAndText';
 
 const StyledNav = styled.nav`
   display: flex;
@@ -34,10 +36,31 @@ export default function Layout() {
   return (
     <StyledNav>
       <StyledLink to="/">Home</StyledLink>
-      {isLoggedIn ? <StyledLink to="/write">Write</StyledLink> : null}
+      {isLoggedIn ? (
+        <StyledLink to="/write">
+          <StyledIconAndText>
+            <FiPenTool />
+            Write
+          </StyledIconAndText>
+        </StyledLink>
+      ) : null}
       <StyledLink to="/about">About</StyledLink>
-      {isLoggedIn ? null : <Button onClick={() => setLoginPopup(true)}>Log in</Button>}
-      {isLoggedIn ? <Button onClick={() => logoutUser()}>Log out</Button> : null}
+      {isLoggedIn ? null : (
+        <Button onClick={() => setLoginPopup(true)}>
+          <StyledIconAndText>
+            <FiLogIn />
+            Log in
+          </StyledIconAndText>
+        </Button>
+      )}
+      {isLoggedIn ? (
+        <Button onClick={() => logoutUser()}>
+          <StyledIconAndText>
+            <FiLogOut />
+            Log out
+          </StyledIconAndText>
+        </Button>
+      ) : null}
       {loginPopup ? <LoginPopup onClose={() => setLoginPopup(false)} /> : null}
     </StyledNav>
   );

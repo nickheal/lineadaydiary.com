@@ -1,4 +1,4 @@
 export default {
-  primary: '#e3f9f3',
-  primaryHover: '#dbf3ed'
+  primary: '#dbf3ed',
+  primaryHover: '#78bdac'
 }

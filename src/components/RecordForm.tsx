@@ -1,12 +1,8 @@
-import React from 'react';
-import { useIdentityContext } from 'react-netlify-identity-widget';
+import React, { useEffect, useState } from 'react';
+import { FiSave, FiThumbsUp } from 'react-icons/fi';
 import { styled } from '../theme/index';
 import Button from './Button';
-
-// export interface Props {
-//   content: string,
-//   year: number
-// }
+import StyledIconAndText from './StyledIconAndText';
 
 const StyledForm = styled.form`
   margin-bottom: 60px;
@@ -46,33 +42,66 @@ const StyledTextArea = styled.textarea`
   }
 `;
 
-export default function Record() {
-  const { user } = useIdentityContext();
+const StyledConfirmation = styled.div`
+  display: inline-block;
+  font-family: ${props => props.theme.typography.fontFamily};
+  margin: 0;
+  padding: 13px 24px;
 
-  console.log(user);
+  & > * {
+    margin-right: 6px;
+  }
+`;
+
+interface Props {
+  loading: boolean;
+  onSave: (newNote: string) => void;
+  value: string;
+}
+
+export default function RecordForm({
+  loading,
+  onSave,
+  value
+}: Props) {
+  const [note, setNote] = useState(value);
+
+  useEffect(() => {
+    setNote(value);
+  }, [value]);
 
   function onSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
-    fetch('/.netlify/functions-dist/owner-records', {
-      body: JSON.stringify({
-        title: 'My todo title',
-        completed: false,
-      }),
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-      },
-      method: 'POST'
-    }).then(response => {
-      return response.json()
-    });
+    onSave(note);
   }
+
+  const changedSinceLastSync = note !== value;
 
   return (
     <StyledForm onSubmit={onSubmit}>
       <StyledLegend>Write a note about today</StyledLegend>
-      <StyledTextArea maxLength={250} />
-      <Button>Submit</Button>
+      <StyledTextArea
+        disabled={loading}
+        maxLength={250}
+        name="todaysNote"
+        onChange={(e) => setNote(e.currentTarget.value)}
+        value={note}
+      />
+      {changedSinceLastSync ? (
+        <Button disabled={loading}>
+          <StyledIconAndText>
+            <FiSave />
+            <p>save changes</p>
+          </StyledIconAndText>
+        </Button>
+      ) : (
+        <StyledConfirmation>
+          <StyledIconAndText>
+            <FiThumbsUp />
+            <p>up to date</p>
+          </StyledIconAndText>
+        </StyledConfirmation>
+      )}
     </StyledForm>
   )
 }

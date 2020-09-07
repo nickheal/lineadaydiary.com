@@ -10,6 +10,7 @@ const StyledContainer = styled.div`
   position: fixed;
   top: 0;
   width: 100vw;
+  z-index: 1;
 `;
 
 const StyledWrapper = styled.div`

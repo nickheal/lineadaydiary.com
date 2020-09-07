@@ -1,10 +1,6 @@
 import React from 'react';
 import { styled } from '../theme/index';
-
-export interface Props {
-  content: string,
-  year: number
-}
+import { Record as Props } from '../models/records';
 
 const StyledArticle = styled.article`
   margin-bottom: 24px;
@@ -30,10 +26,12 @@ const StyledContent = styled.p`
 
 export default function Record({
   content,
+  day,
+  month,
   year
 }: Props) {
   return (
-    <StyledArticle key={year}>
+    <StyledArticle key={`${day}${month}${year}`}>
       <StyledDate>
         {year}
       </StyledDate>

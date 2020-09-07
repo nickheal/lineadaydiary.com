@@ -18,7 +18,6 @@ const StyledP = styled.p`
   line-height: ${props => props.theme.typography.scribe.lineHeight};
   margin: 0;
   margin-bottom: 16px;
-  text-align: center;
 `;
 
 export default function About() {
@@ -27,6 +26,26 @@ export default function About() {
       <Container>
         <StyledHeading>About</StyledHeading>
         <StyledP>lineaday.com is designed...</StyledP>
+
+        <StyledHeading>Why/how it's free</StyledHeading>
+        <StyledP>
+          The aim is to keep lineaday.com free, and open-source forever.<br />
+          This is important due to the potential mental health benefits of journalling.<br />
+          I don't generate any income from this site.<br />
+          Running it is only possible thanks to some amazing services which offer free infrastructure,
+          however if user numbers increase it will be impossible to keep running the site on 'free-tiers' of these services.<br />
+          In the event that this does have to be moved on to paid infrastructure some time in the future
+          I will have to find some means to generate income to cover the costs.
+        </StyledP>
+        <ol>
+          <li>Charitable donations / Charity funding</li>
+          <li>Advertising</li>
+          <li>Paid extras</li>
+        </ol>
+        <StyledP>
+          The one thing that I can guarantee is that <strong>your data is yours</strong>.<br />
+          It will never be shared without your permission. Not for targeted advertising. Not for money.
+        </StyledP>
 
         <StyledHeading>The technical stuff</StyledHeading>
         <StyledP>

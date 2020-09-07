@@ -2,27 +2,32 @@ import faunadb from 'faunadb';
 
 /* configure faunaDB Client with our secret */
 const q = faunadb.query;
+// const client = new faunadb.Client({ secret: 'fnED1EGvuEACEwPUFGFVsAYGxy20p9TXyUt3F4ujmbn' });
 
-/**
- *
- * @param {object} journalData - object containing the title of journal, could contain other data too in the future
- */
-export function createJournal() {
+export interface Record {
+  content: string;
+  day: number;
+  month: number;
+  year: number;
+}
+
+interface CreateRecord {
+  data: Record;
+  secret: string;
+}
+
+export function createRecord({
+  data,
+  secret
+}: CreateRecord) {
+  console.log(secret);
+  const client = new faunadb.Client({ secret });
+  
   const me = q.Identity();
-
-  // client needs to be mutable so it can dynamically re-initialise when a new user logs in.
-  const client = new faunadb.Client({
-    secret: store.getters['auth/currentUser'].app_metadata.db_token
-  });
-
-  const data = {
-    content: 'Hello world',
-    year: 2020
-  };
 
   return client
     .query(
-      q.Create(q.Collection('journals'), {
+      q.Create(q.Collection('records'), {
         data: {
           ...data,
           owner: me
@@ -37,15 +42,30 @@ export function createJournal() {
     .catch(error => error);
 }
 
-// export function getJournals() {
-//   return client
-//     .query(
-//       q.Map(q.Paginate(q.Match(q.Ref('indexes/all_journals'))), ref =>
-//         q.Get(ref)
-//       )
-//     )
-//     .then(resp => resp);
-// }
+interface RecordData {
+  data: Record[]
+}
+
+interface RecordResponse {
+  data: RecordData[]
+}
+
+export function getRecords(secret: string) {
+  const client = new faunadb.Client({ secret });
+
+  return client
+    .query(
+      q.Map(q.Paginate(q.Match(q.Ref('indexes/all_records'))), ref =>
+        q.Get(ref)
+      )
+    )
+    .then(resp => resp.data.map(({ data }) => ({
+      content: data.content,
+      day: data.day,
+      month: data.month,
+      year: data.year
+    })));
+}
 
 // /**
 //  *

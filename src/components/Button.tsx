@@ -13,4 +13,8 @@ export default styled.button`
   &:hover, &:focus {
     background-color: ${props => props.theme.palette.primaryHover};
   }
+
+  &[disabled] {
+    opacity: 0.5;
+  }
 `;

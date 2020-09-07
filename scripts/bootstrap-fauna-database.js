@@ -1,112 +1,115 @@
-/* bootstrap database in your FaunaDB account */
-const readline = require('readline');
+/* idempotent operation to bootstrap database */
 const faunadb = require('faunadb');
 const chalk = require('chalk');
-const insideNetlify = insideNetlifyBuildContext();
+
 const q = faunadb.query;
 
-console.log(chalk.cyan('Creating your FaunaDB Database...\n'));
+/*  */
+function setupFaunaDB() {
+  console.log(chalk.yellow('Attempting to create the DB schemas...'));
 
-// 1. Check for required enviroment variables
-if (!process.env.FAUNADB_SERVER_SECRET) {
-  console.log(chalk.yellow('Required FAUNADB_SERVER_SECRET enviroment variable not found.'))
-  if (insideNetlify) {
-    console.log(`Visit https://app.netlify.com/sites/YOUR_SITE_HERE/settings/deploys`)
-    console.log('and set a `FAUNADB_SERVER_SECRET` value in the \'Build environment variables\' section')
-    process.exit(1)
-  }
-  // Local machine warning
-  if (!insideNetlify) {
-    console.log()
-    console.log('You can create fauna DB keys here: https://dashboard.fauna.com/db/keys')
-    console.log()
-    ask(chalk.bold('Enter your faunaDB server key'), (err, answer) => {
-      if (!answer) {
-        console.log('Please supply a faunaDB server key')
-        process.exit(1)
-      }
-      createFaunaDB(process.env.FAUNADB_SERVER_SECRET).then(() => {
-        console.log('Database created')
-      })
-    });
-  }
-}
+  let key = checkForFaunaKey();
 
-// Has var. Do the thing
-if (process.env.FAUNADB_SERVER_SECRET) {
-  createFaunaDB(process.env.FAUNADB_SERVER_SECRET).then(() => {
-    console.log('Database created')
-  })
-}
-
-/* idempotent operation */
-function createFaunaDB(key) {
-  console.log('Create the database!')
   const client = new faunadb.Client({
     secret: key
   });
 
   /* Based on your requirements, change the schema here */
-  const createUsersDB = client.query(q.Create(q.Ref('classes'), { name: 'users' }))
-    .then(()=>{
-      return client.query(
-        q.Create(q.Ref('indexes'), {
-          name: 'owner_records',
-          source: q.Ref('classes/records'),
-          terms: {
-            field: ['owner']
-          }
-        }))
-    }).catch((e) => {
-      // Database already exists
-      if (e.requestResult.statusCode === 400 && e.message === 'instance not unique') {
-        console.log('DB already exists')
-        throw e
+  return client
+    .query(
+      q.CreateCollection({
+        name: 'users'
+      })
+    )
+    .then(() =>
+      client.query(
+        q.Do(
+          q.CreateCollection({
+            name: 'records',
+            permissions: {
+              create: q.Collection('users')
+            }
+          })
+        )
+      )
+    )
+    .then(() =>
+      client.query(
+        q.Do(
+          q.CreateIndex({
+            name: 'users_by_id',
+            source: q.Collection('users'),
+            terms: [
+              {
+                field: ['data', 'id']
+              }
+            ],
+            unique: true
+          }),
+          q.CreateIndex({
+            // this index is optional but useful in development for browsing users
+            name: `all_users`,
+            source: q.Collection('users')
+          }),
+          q.CreateIndex({
+            name: 'all_records',
+            source: q.Collection('records'),
+            permissions: {
+              read: q.Collection('users')
+            }
+          })
+        )
+      )
+    )
+    .catch(e => {
+      if (e.message === 'instance already exists') {
+        console.log('Schemas are already created... skipping');
+        process.exit(0);
+      } else {
+        console.error('There was a problem bootstrapping the db', e);
+        throw e;
       }
     });
-  const createRecordsDB = client.query(q.Create(q.Ref('classes'), { name: 'records' }))
-    .then(()=>{
-      return client.query(
-        q.Create(q.Ref('indexes'), {
-          name: 'owner_records',
-          source: q.Ref('classes/records'),
-          terms: {
-            field: ['owner']
-          }
-        }))
-    }).catch((e) => {
-      // Database already exists
-      if (e.requestResult.statusCode === 400 && e.message === 'instance not unique') {
-        console.log('DB already exists')
-        throw e
-      }
-    });
-  
-  return Promise.all([
-    createUsersDB,
-    createRecordsDB
-  ]);
 }
 
-
-/* util methods */
-
-// Test if inside netlify build context
-function insideNetlifyBuildContext() {
-  if (process.env.DEPLOY_PRIME_URL) {
-    return true
+function checkForFaunaKey() {
+  if (!process.env.FAUNADB_SERVER_SECRET) {
+    console.log(
+      chalk.bold.red(
+        'Required \'FAUNADB_SERVER_SECRET\' environment variable not found.'
+      )
+    );
+    console.log(
+      chalk.yellow.bold(`
+    ~~~~~~~~~~~~~~~~~~~~~~~~~
+    You can create a your fauna db server secret by following this:
+      - https://docs.fauna.com/fauna/current/tutorials/authentication/user.html#setup-server-key
+    
+    Then ensure you have added the server secret into your Netlify site as an environment variable 
+    with the key 'FAUNADB_SERVER_SECRET'.
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~
+      `)
+    );
+    process.exit(1);
   }
-  return false
+
+  console.log(
+    chalk.green(
+      `Found FAUNADB_SERVER_SECRET environment variable in Netlify site`
+    )
+  );
+  return process.env.FAUNADB_SERVER_SECRET;
 }
 
-// Readline util
-function ask(question, callback) {
-  const rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
+setupFaunaDB()
+  .then(() => {
+    console.log(chalk.green(`Bootstraping DB scheamas was successful!`));
+  })
+  .catch(err => {
+    console.log(
+      chalk.red.bold(
+        `There was an issue bootstrapping the DB scheamas due to: ${err}`
+      )
+    );
+    process.exit(1);
   });
-  rl.question(question + '\n', function(answer) {
-    rl.close();
-    callback(null, answer);
-  });
-}

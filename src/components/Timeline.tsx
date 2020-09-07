@@ -1,4 +1,6 @@
 import React from 'react';
+import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import { useTheme } from 'emotion-theming';
 import { styled } from '../theme/index';
 
 interface Props {
@@ -20,44 +22,30 @@ const StyledDateContainer = styled.div`
 `;
 
 const StyledButton = styled.button`
-  background-color: ${props => props.theme.palette.primary};
+  background-color: white;
   border: 0;
   border-radius: 8px;
   cursor: pointer;
   display: block;
   height: 44px;
   position: relative;
-  transition: background-color 100ms ease-in-out;
+  transition: background-color 100ms ease-in-out, transform 100ms ease-in-out;
   width: 44px;
 
   &:hover, &:focus {
-    background-color: ${props => props.theme.palette.primaryHover};
-  }
-
-  &:after {
-    content: "";
-    border-style: solid;
-    height: 0;
-    left: 50%;
-    position: absolute;
-    top: 50%;
-    width: 0;
+    background-color: ${props => props.theme.palette.primary};
   }
 `;
 
 const StyledButtonLeft = styled(StyledButton)`
-  &:after {
-    border-color: transparent #333 transparent transparent;
-    border-width: 8px 16px 8px 0;
-    transform: translate(-60%, -50%);
+  &:hover, &focus {
+    transform: translateX(-2px);
   }
 `;
 
 const StyledButtonRight = styled(StyledButton)`
-  &:after {
-    border-color: transparent transparent transparent #333;
-    border-width: 8px 0 8px 16px;
-    transform: translate(-40%, -50%);
+  &:hover, &focus {
+    transform: translateX(2px);
   }
 `;
 
@@ -136,6 +124,12 @@ export default function Timeline({
   date,
   onChange
 }: Props) {
+  const {
+    palette: {
+      primaryHover
+    }
+  } = useTheme();
+
   function changeDate(diff: number) {
     const newDate = new Date();
     newDate.setTime(date.getTime() + (diff * 24 * 60 * 60 * 1000));
@@ -145,9 +139,13 @@ export default function Timeline({
   return (
     <StyledContainer>
       <StyledDateContainer>
-        <StyledButtonLeft onClick={() => changeDate(-1)} />
+        <StyledButtonLeft onClick={() => changeDate(-1)}>
+          <FiArrowLeft color={primaryHover} size={24} />
+        </StyledButtonLeft>
         <StyledDate>{`${date.getDate()}${nth(date.getDate())} ${months[date.getMonth()]}`}</StyledDate>
-        <StyledButtonRight onClick={() => changeDate(1)} />
+        <StyledButtonRight onClick={() => changeDate(1)}>
+          <FiArrowRight color={primaryHover} size={24} />
+        </StyledButtonRight>
       </StyledDateContainer>
       <StyledTimeline>
         <StyledIndicator dayNumber={daysIntoYear(date)} />
