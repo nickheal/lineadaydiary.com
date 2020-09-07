@@ -1,8 +1,12 @@
 import React from 'react';
 import { useIdentityContext } from 'react-netlify-identity-widget';
+import { FiUserPlus } from 'react-icons/fi';
 import Button from '../components/Button';
+import Form from '../components/Form';
 import Input from '../components/Input';
 import Label from '../components/Label';
+import Legend from '../components/Legend';
+import IconAndText from '../components/IconAndText';
 
 interface Props {
   onSignUp: () => void
@@ -28,12 +32,18 @@ export default function LoginPopup({
   }
 
   return (
-    <form onSubmit={onSubmit}>
+    <Form onSubmit={onSubmit}>
+      <Legend>or register</Legend>
       <Label htmlFor="email">E-mail</Label>
-      <Input name="email" />
+      <Input name="email" required />
       <Label htmlFor="password">Password</Label>
-      <Input name="password" />
-      <Button>Sign up</Button>
-    </form>
+      <Input name="password" required />
+      <Button>
+        <IconAndText>
+          <FiUserPlus />
+          sign up
+        </IconAndText>
+      </Button>
+    </Form>
   );
 }

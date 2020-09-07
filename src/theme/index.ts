@@ -1,8 +1,10 @@
 import { default as rawStyled, CreateStyled } from '@emotion/styled';
+import mq from './mq';
 import palette from './palette';
 import typography from './typography';
 
 const theme = {
+  mq,
   palette,
   typography
 }
@@ -14,4 +16,3 @@ export {
 };
 
 export default theme;
-

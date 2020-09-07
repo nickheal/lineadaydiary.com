@@ -2,9 +2,9 @@ import React from 'react';
 import { styled } from '../theme/index';
 
 const StyledContainer = styled.div`
-  display: flex;
+  display: inline-flex;
 
-  & > *:first-child {
+  & > * {
     margin-right: 6px;
   }
 
@@ -17,7 +17,7 @@ interface Props {
   children: React.ReactNode
 }
 
-export default function StyledIconAndText({
+export default function IconAndText({
   children
 }: Props) {
   return (

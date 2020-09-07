@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useIdentityContext } from 'react-netlify-identity-widget';
-// import { styled } from '../theme/index';
 import { createRecord, getRecords, Record as RecordType } from '../models/records';
 import Layout from '../components/Layout';
 import Container from '../components/Container';

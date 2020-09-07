@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { FiSave, FiThumbsUp } from 'react-icons/fi';
 import { styled } from '../theme/index';
 import Button from './Button';
-import StyledIconAndText from './StyledIconAndText';
+import IconAndText from './IconAndText';
 
 const StyledForm = styled.form`
   margin-bottom: 60px;
@@ -89,17 +89,17 @@ export default function RecordForm({
       />
       {changedSinceLastSync ? (
         <Button disabled={loading}>
-          <StyledIconAndText>
+          <IconAndText>
             <FiSave />
             <p>save changes</p>
-          </StyledIconAndText>
+          </IconAndText>
         </Button>
       ) : (
         <StyledConfirmation>
-          <StyledIconAndText>
+          <IconAndText>
             <FiThumbsUp />
             <p>up to date</p>
-          </StyledIconAndText>
+          </IconAndText>
         </StyledConfirmation>
       )}
     </StyledForm>

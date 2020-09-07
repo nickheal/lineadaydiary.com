@@ -1,22 +1,42 @@
 import React, { useState } from 'react';
 import { Link } from 'gatsby';
 import { useIdentityContext } from 'react-netlify-identity-widget';
-import { FiLogIn, FiLogOut, FiPenTool } from 'react-icons/fi';
+import { FiLogIn, FiLogOut, FiMenu, FiPenTool, FiXCircle } from 'react-icons/fi';
 import { styled } from '../theme/index';
 import Button from './Button';
-import LoginPopup from './LoginPopup';
-import StyledIconAndText from './StyledIconAndText';
+import LoginModal from './LoginModal';
+import IconAndText from './IconAndText';
 
-const StyledNav = styled.nav`
-  display: flex;
+interface StyledNavProps {
+  open: boolean;
+}
+const StyledNav = styled.nav<StyledNavProps>`
+  background: white;
+  border: solid 1px grey;
+  border-top: 0;
+  border-left: 0;
+  border-radius: 0 0 8px 0;
+  display: ${props => props.open ? 'block' : 'none'};
   justify-content: center;
   margin-bottom: 32px;
-  padding: 8px;
+  padding: 0;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+
+  ${props => props.theme.mq.tablet} {
+    background: transparent;
+    border: 0;
+    display: flex;
+    padding: 8px;
+    position: static;
+  }
 `;
 
 const StyledLink = styled(Link)`
   border-radius: 8px;
   color: #333;
+  display: block;
   font-family: ${props => props.theme.typography.fontFamily};
   font-size: 16px;
   padding: 13px 24px;
@@ -28,40 +48,72 @@ const StyledLink = styled(Link)`
   }
 `;
 
+const MenuOpenButton = styled.button`
+  background: 0;
+  border: 0;
+  cursor: pointer;
+  margin-bottom: 32px;
+  padding: 16px;
+
+  ${props => props.theme.mq.tablet} {
+    display: none;
+  }
+`;
+
+const MenuCloseButton = styled.button`
+  background: 0;
+  border: 0;
+  cursor: pointer;
+  padding: 16px;
+
+  ${props => props.theme.mq.tablet} {
+    display: none;
+  }
+`;
+
 export default function Layout() {
   const { isLoggedIn, logoutUser } = useIdentityContext();
 
+  const [loginOpen, setLoginOpen] = useState(false);
   const [loginPopup, setLoginPopup] = useState(false);
   
   return (
-    <StyledNav>
-      <StyledLink to="/">Home</StyledLink>
-      {isLoggedIn ? (
-        <StyledLink to="/write">
-          <StyledIconAndText>
-            <FiPenTool />
-            Write
-          </StyledIconAndText>
-        </StyledLink>
-      ) : null}
-      <StyledLink to="/about">About</StyledLink>
-      {isLoggedIn ? null : (
-        <Button onClick={() => setLoginPopup(true)}>
-          <StyledIconAndText>
-            <FiLogIn />
-            Log in
-          </StyledIconAndText>
-        </Button>
-      )}
-      {isLoggedIn ? (
-        <Button onClick={() => logoutUser()}>
-          <StyledIconAndText>
-            <FiLogOut />
-            Log out
-          </StyledIconAndText>
-        </Button>
-      ) : null}
-      {loginPopup ? <LoginPopup onClose={() => setLoginPopup(false)} /> : null}
-    </StyledNav>
+    <>
+      <MenuOpenButton onClick={() => setLoginOpen(true)}>
+        <FiMenu size={32} />
+      </MenuOpenButton>
+      <StyledNav open={loginOpen}>
+        <MenuCloseButton onClick={() => setLoginOpen(false)}>
+          <FiXCircle size={32} />
+        </MenuCloseButton>
+        <StyledLink to="/">Home</StyledLink>
+        {isLoggedIn ? (
+          <StyledLink to="/write">
+            <IconAndText>
+              <FiPenTool />
+              Write
+            </IconAndText>
+          </StyledLink>
+        ) : null}
+        <StyledLink to="/about">About</StyledLink>
+        {isLoggedIn ? null : (
+          <Button onClick={() => setLoginPopup(true)}>
+            <IconAndText>
+              <FiLogIn />
+              Log in
+            </IconAndText>
+          </Button>
+        )}
+        {isLoggedIn ? (
+          <Button onClick={() => logoutUser()}>
+            <IconAndText>
+              <FiLogOut />
+              Log out
+            </IconAndText>
+          </Button>
+        ) : null}
+        {loginPopup ? <LoginModal onClose={() => setLoginPopup(false)} /> : null}
+      </StyledNav>
+    </>
   );
 }

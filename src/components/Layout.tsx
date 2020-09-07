@@ -2,7 +2,7 @@ import React from 'react';
 import { Global, css } from '@emotion/core';
 import { ThemeProvider } from 'emotion-theming';
 import Nav from './Nav';
-import theme from '../theme/index';
+import theme, { styled } from '../theme/index';
 
 interface Props {
   children: React.ReactNode
@@ -19,6 +19,18 @@ const globalStyles = css`
   }
 `;
 
+const StyledMain = styled.main`
+  padding-bottom: 120px;
+`;
+
+const StyledFooter = styled.footer`
+  color: #777;
+  font-family: ${props => props.theme.typography.fontFamily};
+  font-size: 12px;
+  padding: 32px;
+  text-align: center;
+`;
+
 export default function Layout({
   children
 }: Props) {
@@ -26,9 +38,12 @@ export default function Layout({
     <ThemeProvider theme={theme}>
       <Global styles={globalStyles} />
       <Nav />
-      <main>
+      <StyledMain>
         { children }
-      </main>
+      </StyledMain>
+      <StyledFooter>
+        &copy; {new Date().getFullYear()} Nicholas S. Heal.
+      </StyledFooter>
     </ThemeProvider>
   );
 }

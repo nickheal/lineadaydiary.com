@@ -1,12 +1,14 @@
 import React from 'react';
+import { FiCalendar } from 'react-icons/fi';
 import { styled } from '../theme/index';
 import { Record as Props } from '../models/records';
+import IconAndText from '../components/IconAndText';
 
 const StyledArticle = styled.article`
   margin-bottom: 24px;
 `;
 
-const StyledDate = styled.p`
+const StyledDate = styled.div`
   font-family: ${props => props.theme.typography.fontFamily};
   margin: 0;
   margin-bottom: 8px;
@@ -33,7 +35,10 @@ export default function Record({
   return (
     <StyledArticle key={`${day}${month}${year}`}>
       <StyledDate>
-        {year}
+        <IconAndText>
+          <FiCalendar />
+          {year}
+        </IconAndText>
       </StyledDate>
       <StyledContent>{content}</StyledContent>
     </StyledArticle>

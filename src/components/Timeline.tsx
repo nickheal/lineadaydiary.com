@@ -1,5 +1,5 @@
 import React from 'react';
-import { FiArrowLeft, FiArrowRight } from 'react-icons/fi';
+import { FiArrowLeft, FiArrowRight, FiChevronDown } from 'react-icons/fi';
 import { useTheme } from 'emotion-theming';
 import { styled } from '../theme/index';
 
@@ -38,14 +38,18 @@ const StyledButton = styled.button`
 `;
 
 const StyledButtonLeft = styled(StyledButton)`
-  &:hover, &focus {
-    transform: translateX(-2px);
+  &:hover, &:focus {
+    & svg {
+      transform: translateX(-2px);
+    }
   }
 `;
 
 const StyledButtonRight = styled(StyledButton)`
-  &:hover, &focus {
-    transform: translateX(2px);
+  &:hover, &:focus {
+    & svg {
+      transform: translateX(2px);
+    }
   }
 `;
 
@@ -92,16 +96,12 @@ interface Indicator {
   dayNumber: number
 }
 
-const StyledIndicator = styled.div<Indicator>`
-  border-style: solid;
-  border-width: 10px 10px 0 10px;
-  border-color: ${props => props.theme.palette.primaryHover} transparent transparent transparent;
+const StyledIndicator = styled(FiChevronDown)<Indicator>`
   bottom: 100%;
-  height: 0;
   left: ${props => (props.dayNumber / 365) * 100}%;
   position: absolute;
   transform: translateX(-10px);
-  width: 0;
+  transition: left 100ms ease-in-out;
 `;
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -148,7 +148,7 @@ export default function Timeline({
         </StyledButtonRight>
       </StyledDateContainer>
       <StyledTimeline>
-        <StyledIndicator dayNumber={daysIntoYear(date)} />
+        <StyledIndicator color={primaryHover} dayNumber={daysIntoYear(date)} size={24} />
         {new Array(52).fill(0).map((_, index) => <StyledWeek key={index} left={index} />)}
         {new Array(365).fill(0).map((_, index) => <StyledDay key={index} left={index} />)}
       </StyledTimeline>

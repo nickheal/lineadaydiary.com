@@ -27,23 +27,51 @@ export default function About() {
         <StyledHeading>About</StyledHeading>
         <StyledP>lineaday.com is designed...</StyledP>
 
-        <StyledHeading>Why/how it's free</StyledHeading>
+        <StyledHeading>Why, and how it's free</StyledHeading>
         <StyledP>
           The aim is to keep lineaday.com free, and open-source forever.<br />
           This is important due to the potential mental health benefits of journalling.<br />
           I don't generate any income from this site.<br />
-          Running it is only possible thanks to some amazing services which offer free infrastructure,
-          however if user numbers increase it will be impossible to keep running the site on 'free-tiers' of these services.<br />
+          Running it is only possible thanks to some amazing services which offer free infrastructure
+          (feel free to go and thank them on twitter if you like).
+        </StyledP>
+        <ul>
+          <li>
+            <Link href="https://www.netlify.com/" target="_BLANK">Netlify</Link>
+            {' '}
+            (
+            <Link href="https://twitter.com/Netlify" target="_BLANK">@Netlify</Link>
+            )
+          </li>
+          <li>
+            <Link href="https://fauna.com/" target="_BLANK">Fauna</Link>
+            {' '}
+            (
+            <Link href="https://twitter.com/fauna" target="_BLANK">@fauna</Link>
+            )
+          </li>
+          <li>
+            <Link href="https://github.com/" target="_BLANK">GitHub</Link>
+            {' '}
+            (
+            <Link href="https://twitter.com/github" target="_BLANK">@github</Link>
+            )
+          </li>
+        </ul>
+        <StyledP>
+          If user numbers increase it may become impossible to keep running the site on 'free-tiers' of these services.<br />
           In the event that this does have to be moved on to paid infrastructure some time in the future
-          I will have to find some means to generate income to cover the costs.
+          I will have to find some means to generate income to cover the costs.<br />
+          I don't have the answers right now to how that would work, but below is a list of options, in my current order of preference:<br />
         </StyledP>
         <ol>
-          <li>Charitable donations / Charity funding</li>
-          <li>Advertising</li>
+          <li>Voluntary donations / charity funding</li>
           <li>Paid extras</li>
+          <li>Advertising</li>
+          <li>Subscriptions</li>
         </ol>
         <StyledP>
-          The one thing that I can guarantee is that <strong>your data is yours</strong>.<br />
+          The one thing that I can guarantee is that <strong>your personal data is yours</strong>.<br />
           It will never be shared without your permission. Not for targeted advertising. Not for money.
         </StyledP>
 
@@ -74,6 +102,16 @@ export default function About() {
           {' '}
           before submitting a pull-request.
         </StyledP>
+
+        <StyledHeading>The roadmap</StyledHeading>
+        <StyledP>
+          As this project is guided by you I don't have a set roadmap I'm following currently.<br />
+          Some possible paths are listed below:
+        </StyledP>
+        <ul>
+          <li>Add self-service account recovery (reset password link).</li>
+          <li>PWA functionality. This means you can install the website on your phone—like an app—and use some of the features offline.</li>
+        </ul>
       </Container>
     </Layout>
   );
