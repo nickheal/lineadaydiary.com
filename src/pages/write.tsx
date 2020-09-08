@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useIdentityContext } from 'react-netlify-identity-widget';
 import handle from 'await-error-handle';
+import { styled } from '../theme/index';
 import { upsertRecord, getRecords, Record as RecordType } from '../models/records';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
@@ -8,6 +9,11 @@ import Banner from '../components/Banner';
 import Record from '../components/Record';
 import RecordForm from '../components/RecordForm';
 import Timeline from '../components/Timeline';
+
+const StyledP = styled.p`
+  font-family: ${props => props.theme.typography.fontFamily};
+  text-align: center;
+`;
 
 function getBlankDay(date: Date) {
   return {
@@ -101,7 +107,12 @@ export default function Write() {
           saving={saving}
           value={today.content}
         />
-        {rest.length ? rest.map(Record) : null}
+        {rest.length ? rest.map(Record) : (
+          <StyledP>
+            Wondering what you were doing this time last year?<br />
+            Make a note above, and it will appear here next year.
+          </StyledP>
+        )}
       </Container>
     </Layout>
   );
