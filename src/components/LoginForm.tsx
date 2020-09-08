@@ -20,6 +20,7 @@ export default function LoginPopup({
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   function onInputChange(e: React.ChangeEvent<HTMLInputElement>, setter: (value: string) => void) {
@@ -29,6 +30,7 @@ export default function LoginPopup({
 
   function onSubmit(e: React.SyntheticEvent) {
     e.preventDefault();
+    setLoading(true);
     loginUser(email, password, true)
       .then((user) => {
         if (process.env.NODE_ENV !== 'production') console.log('Success! Logged in', user)
@@ -36,6 +38,9 @@ export default function LoginPopup({
       })
       .catch(() => { 
         setError('There was an issue logging in.');
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
@@ -56,7 +61,7 @@ export default function LoginPopup({
         required
         value={password}
       />
-      <Button>
+      <Button aria-busy={loading} disabled={loading} type="submit">
         <IconAndText>
           <FiLogIn />
           log in
