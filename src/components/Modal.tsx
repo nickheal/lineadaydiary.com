@@ -17,6 +17,8 @@ const StyledWrapper = styled.div`
   background-color: #fff;
   border-radius: 8px;
   left: 50%;
+  max-height: 90vh;
+  overflow-y: scroll;
   padding: 48px 48px 24px 48px;
   position: absolute;
   top: 50%;

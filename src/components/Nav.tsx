@@ -18,6 +18,7 @@ const StyledNav = styled.nav<StyledNavProps>`
   display: ${props => props.open ? 'block' : 'none'};
   justify-content: center;
   margin-bottom: 32px;
+  overflow: hidden;
   padding: 0;
   position: fixed;
   top: 0;
@@ -83,6 +84,14 @@ const MenuCloseButton = styled.button`
   }
 `;
 
+const NavButton = styled(Button)`
+  border-radius: 0;
+
+  ${props => props.theme.mq.tablet} {
+    border-radius: 8px;
+  }
+`;
+
 export default function Layout() {
   const { isLoggedIn, logoutUser } = useIdentityContext();
 
@@ -111,20 +120,20 @@ export default function Layout() {
         ) : null}
         <StyledLink activeClassName="active" to="/about">About</StyledLink>
         {isLoggedIn ? null : (
-          <Button onClick={() => setLoginPopup(true)}>
+          <NavButton onClick={() => setLoginPopup(true)}>
             <IconAndText>
               <FiLogIn />
               Log in
             </IconAndText>
-          </Button>
+          </NavButton>
         )}
         {isLoggedIn ? (
-          <Button onClick={() => logoutUser()}>
+          <NavButton onClick={() => logoutUser()}>
             <IconAndText>
               <FiLogOut />
               Log out
             </IconAndText>
-          </Button>
+          </NavButton>
         ) : null}
         {loginPopup ? <LoginModal onClose={() => setLoginPopup(false)} /> : null}
       </StyledNav>

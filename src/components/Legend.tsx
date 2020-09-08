@@ -4,6 +4,7 @@ import { styled } from '../theme/index';
 const StyledLegend = styled.legend`
   align-items: center;
   display: flex;
+  flex-wrap: nowrap;
   font-family: ${props => props.theme.typography.fontFamily};
   margin-bottom: 32px;
   padding: 0;
