@@ -56,12 +56,14 @@ const StyledConfirmation = styled.div`
 interface Props {
   loading: boolean;
   onSave: (newNote: string) => void;
+  saving: boolean;
   value: string;
 }
 
 export default function RecordForm({
   loading,
   onSave,
+  saving,
   value
 }: Props) {
   const [note, setNote] = useState(value);
@@ -88,7 +90,7 @@ export default function RecordForm({
         value={note}
       />
       {changedSinceLastSync ? (
-        <Button disabled={loading}>
+        <Button aria-busy={saving} disabled={loading || saving}>
           <IconAndText>
             <FiSave />
             <p>save changes</p>

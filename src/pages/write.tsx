@@ -38,6 +38,7 @@ export default function Write() {
 
   const [date, setDate] = useState(new Date());
   const [records, setRecords] = useState<RecordType[]>();
+  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     async function fetchRecords() {
@@ -46,18 +47,20 @@ export default function Write() {
     fetchRecords();
   }, []);
 
-  function onSave(newNote: string) {
+  async function onSave(newNote: string) {
+    setSaving(true);
     const newRecord = {
       content: newNote,
       day: date.getDate(),
       month: date.getMonth(),
       year: date.getFullYear()
     };
-    createRecord({
+    await createRecord({
       data: newRecord,
       secret: user?.app_metadata?.db_token
     });
     setRecords([...records, newRecord]);
+    setSaving(false);
   }
 
   const [today, ...rest] = getCalendarDay(date, records);
@@ -69,6 +72,7 @@ export default function Write() {
         <RecordForm
           loading={!records}
           onSave={onSave}
+          saving={saving}
           value={today.content}
         />
         {rest.length ? rest.map(Record) : null}
