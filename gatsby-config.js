@@ -21,6 +21,27 @@ module.exports = {
         // Defines where to place the tracking script - `true` in the head and `false` in the body
         head: false
       }
+    },
+    {
+      resolve: 'gatsby-plugin-manifest',
+      options: {
+        name: 'lineadaydiary.com',
+        short_name: 'lineadaydiary.com',
+        start_url: '/',
+        background_color: '#dbf3ed',
+        theme_color: '#dbf3ed',
+        // Enables "Add to Homescreen" prompt and disables browser UI (including back button)
+        // see https://developers.google.com/web/fundamentals/web-app-manifest/#display
+        display: 'standalone',
+        icon: 'static/favicon.ico', // This path is relative to the root of the site.
+        icon_options: {
+          purpose: 'any maskable',
+        },
+        // An optional attribute which provides support for CORS check.
+        // If you do not provide a crossOrigin option, it will skip CORS for manifest.
+        // Any invalid keyword or empty string defaults to `anonymous`
+        crossOrigin: 'use-credentials'
+      },
     }
   ],
   developMiddleware: app => {

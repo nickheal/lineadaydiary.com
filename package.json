@@ -25,6 +25,7 @@
     "faunadb": "^3.0.1",
     "gatsby": "^2.24.50",
     "gatsby-plugin-google-analytics": "^2.3.13",
+    "gatsby-plugin-manifest": "^2.4.28",
     "gatsby-plugin-netlify-identity": "0.0.3",
     "gatsby-plugin-react-helmet": "^3.3.10",
     "react": "^16.12.0",
