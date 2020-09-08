@@ -13,10 +13,8 @@ interface StyledNavProps {
 }
 const StyledNav = styled.nav<StyledNavProps>`
   background: white;
-  border: solid 1px grey;
-  border-top: 0;
-  border-left: 0;
   border-radius: 0 0 8px 0;
+  box-shadow: 1px 1px 10px rgba(0,0,0,0.1);
   display: ${props => props.open ? 'block' : 'none'};
   justify-content: center;
   margin-bottom: 32px;
@@ -28,6 +26,7 @@ const StyledNav = styled.nav<StyledNavProps>`
   ${props => props.theme.mq.tablet} {
     background: transparent;
     border: 0;
+    box-shadow: none;
     display: flex;
     padding: 8px;
     position: static;
@@ -81,12 +80,12 @@ export default function Layout() {
   return (
     <>
       <MenuOpenButton onClick={() => setLoginOpen(true)}>
-        <FiMenu size={32} />
+        <FiMenu size={32} strokeWidth={1} />
           <VisuallyHidden>Open navigation</VisuallyHidden>
       </MenuOpenButton>
       <StyledNav open={loginOpen}>
         <MenuCloseButton onClick={() => setLoginOpen(false)}>
-          <FiXCircle size={32} />
+          <FiXCircle size={32} strokeWidth={1} />
           <VisuallyHidden>Close navigation</VisuallyHidden>
         </MenuCloseButton>
         <StyledLink to="/">Home</StyledLink>
