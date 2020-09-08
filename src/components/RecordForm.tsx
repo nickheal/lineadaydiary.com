@@ -3,6 +3,7 @@ import { FiSave, FiThumbsUp } from 'react-icons/fi';
 import { styled } from '../theme/index';
 import Button from './Button';
 import IconAndText from './IconAndText';
+import VisuallyHidden from './VisuallyHidden';
 
 const StyledForm = styled.form`
   margin-bottom: 60px;
@@ -82,8 +83,12 @@ export default function RecordForm({
   return (
     <StyledForm onSubmit={onSubmit}>
       <StyledLegend>Write a note about today</StyledLegend>
+      <VisuallyHidden>
+        <label htmlFor="todaysNote">Todays note</label>
+      </VisuallyHidden>
       <StyledTextArea
         disabled={loading}
+        id="todaysNote"
         maxLength={250}
         name="todaysNote"
         onChange={(e) => setNote(e.currentTarget.value)}

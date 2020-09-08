@@ -2,6 +2,7 @@ import React from 'react';
 import { FiArrowLeft, FiArrowRight, FiChevronDown } from 'react-icons/fi';
 import { useTheme } from 'emotion-theming';
 import { styled } from '../theme/index';
+import VisuallyHidden from './VisuallyHidden';
 
 interface Props {
   date: Date,
@@ -141,10 +142,12 @@ export default function Timeline({
       <StyledDateContainer>
         <StyledButtonLeft onClick={() => changeDate(-1)}>
           <FiArrowLeft color={primaryHover} size={24} />
+          <VisuallyHidden>Previous day</VisuallyHidden>
         </StyledButtonLeft>
         <StyledDate>{`${date.getDate()}${nth(date.getDate())} ${months[date.getMonth()]}`}</StyledDate>
         <StyledButtonRight onClick={() => changeDate(1)}>
           <FiArrowRight color={primaryHover} size={24} />
+          <VisuallyHidden>Next day</VisuallyHidden>
         </StyledButtonRight>
       </StyledDateContainer>
       <StyledTimeline>
