@@ -82,7 +82,7 @@ export default function Write() {
     if (existingRecord) {
       existingRecord.content = newNote;
     } else {
-      setRecords([...records, newRecord]);
+      setRecords([...(records || []), newRecord]);
     }
 
     setSaving(false);
