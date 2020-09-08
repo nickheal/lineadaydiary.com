@@ -11,7 +11,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-netlify-identity',
       options: {
-        url: 'https://lineadaydiary.netlify.app'
+        url: 'https://lineadaydiary.com'
       }
     },
     {
