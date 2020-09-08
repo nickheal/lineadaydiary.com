@@ -87,7 +87,7 @@ export default function About() {
           This means <em>you</em> can influence the direction it goes in.
           To file an issue, or request a feature, please use the
           {' '}
-          <Link href="https://github.com/nickheal/lineaday.com/issues" target="_BLANK">
+          <Link href="https://github.com/nickheal/lineadaydiary.com/issues" target="_BLANK">
             GitHub issue tracker
           </Link>
           .
@@ -95,14 +95,14 @@ export default function About() {
         <StyledP>
           You can review, and request changes to the code at
           {' '}
-          <Link href="https://github.com/nickheal/lineaday.com" target="_BLANK">
-            https://github.com/nickheal/lineaday.com
+          <Link href="https://github.com/nickheal/lineadaydiary.com" target="_BLANK">
+            https://github.com/nickheal/lineadaydiary.com
           </Link>
           .
           {' '}
           Please read the
           {' '}
-          <Link href="https://github.com/nickheal/lineaday.com/blob/.github/CONTRIBUTING.md" target="_BLANK">
+          <Link href="https://github.com/nickheal/lineadaydiary.com/blob/.github/CONTRIBUTING.md" target="_BLANK">
             contribution guide
           </Link>
           {' '}
