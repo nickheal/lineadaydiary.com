@@ -7,8 +7,8 @@ interface Props {
 
 const StyledContainer = styled.section`
   margin: 0 auto;
-  max-width: 640px;
-  padding: 8px;
+  max-width: 650px;
+  padding: 16px;
   width: 100%;
 `;
 
