@@ -11,31 +11,35 @@ export interface Record {
   year: number;
 }
 
-interface CreateRecord {
+interface UpsertRecord {
   data: Record;
   secret: string;
 }
 
-export async function createRecord({
+export async function upsertRecord({
   data,
   secret
-}: CreateRecord) {
+}: UpsertRecord) {
   const client = new faunadb.Client({ secret });
   
   const me = q.Identity();
 
   const response = await client
     .query(
-      q.Create(q.Collection('records'), {
-        data: {
-          ...data,
-          owner: me
-        },
-        permissions: {
-          read: me,
-          write: me
-        }
-      })
+      q.If(
+        q.Exists(q.Match(q.Index('records_by_date'), [data.day, data.month, data.year, me])),
+        q.Update(q.Select(['ref'], q.Get(q.Match(q.Index('records_by_date'), [data.day, data.month, data.year, me]))), { data }),
+        q.Create(q.Collection('records'), {
+          data: {
+            ...data,
+            owner: me
+          },
+          permissions: {
+            read: me,
+            write: me
+          }
+        })
+      )
     );
 
   return response;

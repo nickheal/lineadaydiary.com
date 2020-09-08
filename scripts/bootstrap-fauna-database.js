@@ -57,6 +57,28 @@ function setupFaunaDB() {
             permissions: {
               read: q.Collection('users')
             }
+          }),
+          q.CreateIndex({
+            name: 'records_by_date',
+            source: q.Collection('records'),
+            permissions: {
+              read: q.Collection('users')
+            },
+            terms: [
+              {
+                field: ['data', 'day']
+              },
+              {
+                field: ['data', 'month']
+              },
+              {
+                field: ['data', 'year']
+              },
+              {
+                field: ['data', 'owner']
+              }
+            ],
+            unique: true
           })
         )
       )

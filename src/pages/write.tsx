@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useIdentityContext } from 'react-netlify-identity-widget';
 import handle from 'await-error-handle';
-import { createRecord, getRecords, Record as RecordType } from '../models/records';
+import { upsertRecord, getRecords, Record as RecordType } from '../models/records';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
 import Banner from '../components/Banner';
@@ -63,13 +63,24 @@ export default function Write() {
       month: date.getMonth(),
       year: date.getFullYear()
     };
-    const [err] = await handle(createRecord({
+    const [err] = await handle(upsertRecord({
       data: newRecord,
       secret: user?.app_metadata?.db_token
     }));
 
     if (err) {
       setError('We had trouble saving your note. Please try again later.');
+    }
+
+    const existingRecord = !err &&
+      records?.find(({ day, month, year }) => (
+        day === newRecord.day &&
+        month === newRecord.month &&
+        year === newRecord.year
+      ));
+    
+    if (existingRecord) {
+      existingRecord.content = newNote;
     } else {
       setRecords([...records, newRecord]);
     }
