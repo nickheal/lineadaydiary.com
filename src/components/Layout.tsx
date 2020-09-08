@@ -39,7 +39,7 @@ export default function Layout({
     <ThemeProvider theme={theme}>
       <Helmet
         htmlAttributes={{ lang: 'en-gb' }}
-        title="lineaday.com. Write for you."
+        title="lineadaydiary.com. Write for you."
       />
       <Global styles={globalStyles} />
       <Nav />

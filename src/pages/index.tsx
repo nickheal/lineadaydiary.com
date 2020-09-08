@@ -23,7 +23,7 @@ export default function Home() {
   return (
     <Layout>
       <Container>
-        <Title>lineaday.com</Title>
+        <Title>lineadaydiary.com</Title>
         <SubTitle>Write for you.</SubTitle>
       </Container>
     </Layout>

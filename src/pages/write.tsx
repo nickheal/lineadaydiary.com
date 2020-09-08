@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useIdentityContext } from 'react-netlify-identity-widget';
+import handle from 'await-error-handle';
 import { createRecord, getRecords, Record as RecordType } from '../models/records';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
+import Banner from '../components/Banner';
 import Record from '../components/Record';
 import RecordForm from '../components/RecordForm';
 import Timeline from '../components/Timeline';
@@ -37,12 +39,18 @@ export default function Write() {
   const { user } = useIdentityContext();
 
   const [date, setDate] = useState(new Date());
+  const [error, setError] = useState<string | null>(null);
   const [records, setRecords] = useState<RecordType[]>();
   const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     async function fetchRecords() {
-      setRecords(await getRecords(user?.app_metadata?.db_token));
+      const [err, res] = await handle(getRecords(user?.app_metadata?.db_token));
+      if (err) {
+        setError('We had trouble fetching your notes. Please try again later.');
+        return;
+      }
+      setRecords(res);
     }
     fetchRecords();
   }, []);
@@ -55,11 +63,17 @@ export default function Write() {
       month: date.getMonth(),
       year: date.getFullYear()
     };
-    await createRecord({
+    const [err] = await handle(createRecord({
       data: newRecord,
       secret: user?.app_metadata?.db_token
-    });
-    setRecords([...records, newRecord]);
+    }));
+
+    if (err) {
+      setError('We had trouble saving your note. Please try again later.');
+    } else {
+      setRecords([...records, newRecord]);
+    }
+
     setSaving(false);
   }
 
@@ -69,6 +83,7 @@ export default function Write() {
     <Layout>
       <Timeline date={date} onChange={setDate} />
       <Container>
+        {error ? <Banner>{ error }</Banner> : null}
         <RecordForm
           loading={!records}
           onSave={onSave}

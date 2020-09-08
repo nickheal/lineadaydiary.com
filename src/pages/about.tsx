@@ -31,11 +31,11 @@ export default function About() {
     <Layout>
       <Container>
         <StyledHeading>About</StyledHeading>
-        <StyledP>lineaday.com is designed...</StyledP>
+        <StyledP>lineadaydiary.com is designed...</StyledP>
 
         <StyledHeading>Why, and how it's free</StyledHeading>
         <StyledP>
-          The aim is to keep lineaday.com free, and open-source forever.<br />
+          The aim is to keep lineadaydiary.com free, and open-source forever.<br />
           This is important due to the potential mental health benefits of journalling.<br />
           I don't generate any income from this site.<br />
           Running it is only possible thanks to some amazing services which offer free infrastructure
@@ -83,7 +83,7 @@ export default function About() {
 
         <StyledHeading>The technical stuff</StyledHeading>
         <StyledP>
-          lineaday.com is an open-source project.
+          lineadaydiary.com is an open-source project.
           This means <em>you</em> can influence the direction it goes in.
           To file an issue, or request a feature, please use the
           {' '}
@@ -117,6 +117,7 @@ export default function About() {
         <ul>
           <StyledLi>Add self-service account recovery (reset password link).</StyledLi>
           <StyledLi>Add SSO. This would allow you to sign-up/sign-in with accounts you already have with other providers (eg. Facebook, Google, etc.)</StyledLi>
+          <StyledLi>Add open-source internationalisation. This would let volunteers contribute local language translations for elements of the UI.</StyledLi>
           <StyledLi>PWA functionality. This means you can install the website on your phone—like an app—and use some of the features offline.</StyledLi>
         </ul>
       </Container>

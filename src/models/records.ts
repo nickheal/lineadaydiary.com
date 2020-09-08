@@ -16,16 +16,15 @@ interface CreateRecord {
   secret: string;
 }
 
-export function createRecord({
+export async function createRecord({
   data,
   secret
 }: CreateRecord) {
-  console.log(secret);
   const client = new faunadb.Client({ secret });
   
   const me = q.Identity();
 
-  return client
+  const response = await client
     .query(
       q.Create(q.Collection('records'), {
         data: {
@@ -37,9 +36,9 @@ export function createRecord({
           write: me
         }
       })
-    )
-    .then(resp => resp)
-    .catch(error => error);
+    );
+
+  return response;
 }
 
 interface RecordData {
@@ -50,42 +49,22 @@ interface RecordResponse {
   data: RecordData[]
 }
 
-export function getRecords(secret: string) {
-  return [{
-    content: 'Hi! 8-8-2020',
-    day: 8,
-    month: 8,
-    year: 2020
-  }, {
-    content: 'Hi! 7-8-2020',
-    day: 7,
-    month: 8,
-    year: 2020
-  }, {
-    content: 'Hi! 6-8-2020',
-    day: 6,
-    month: 8,
-    year: 2020
-  }, {
-    content: 'Hi! 7-8-2019',
-    day: 7,
-    month: 8,
-    year: 2019
-  }];
-  // const client = new faunadb.Client({ secret });
+export async function getRecords(secret: string) {
+  const client = new faunadb.Client({ secret });
 
-  // return client
-  //   .query(
-  //     q.Map(q.Paginate(q.Match(q.Ref('indexes/all_records'))), ref =>
-  //       q.Get(ref)
-  //     )
-  //   )
-  //   .then(resp => resp.data.map(({ data }) => ({
-  //     content: data.content,
-  //     day: data.day,
-  //     month: data.month,
-  //     year: data.year
-  //   })));
+  const response = await client
+    .query(
+      q.Map(q.Paginate(q.Match(q.Ref('indexes/all_records'))), ref =>
+        q.Get(ref)
+      )
+    );
+
+  return response.data.map(({ data }) => ({
+    content: data.content,
+    day: data.day,
+    month: data.month,
+    year: data.year
+  }));
 }
 
 // /**

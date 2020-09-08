@@ -20,6 +20,7 @@
   "dependencies": {
     "@emotion/core": "^10.0.35",
     "@emotion/styled": "^10.0.27",
+    "await-error-handle": "^1.0.9",
     "emotion-theming": "^10.0.27",
     "gatsby": "^2.24.50",
     "gatsby-plugin-netlify-identity": "0.0.3",
