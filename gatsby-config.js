@@ -11,7 +11,15 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-netlify-identity',
       options: {
-        url: 'https://serene-meninsky-c44e32.netlify.app'
+        url: 'https://lineadaydiary.netlify.app'
+      }
+    },
+    {
+      resolve: 'gatsby-plugin-google-analytics',
+      options: {
+        trackingId: 'UA-177455208-1',
+        // Defines where to place the tracking script - `true` in the head and `false` in the body
+        head: false
       }
     }
   ],
