@@ -6,6 +6,7 @@ import { styled } from '../theme/index';
 import Button from './Button';
 import LoginModal from './LoginModal';
 import IconAndText from './IconAndText';
+import VisuallyHidden from './VisuallyHidden';
 
 interface StyledNavProps {
   open: boolean;
@@ -81,10 +82,12 @@ export default function Layout() {
     <>
       <MenuOpenButton onClick={() => setLoginOpen(true)}>
         <FiMenu size={32} />
+          <VisuallyHidden>Open navigation</VisuallyHidden>
       </MenuOpenButton>
       <StyledNav open={loginOpen}>
         <MenuCloseButton onClick={() => setLoginOpen(false)}>
           <FiXCircle size={32} />
+          <VisuallyHidden>Close navigation</VisuallyHidden>
         </MenuCloseButton>
         <StyledLink to="/">Home</StyledLink>
         {isLoggedIn ? (

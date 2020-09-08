@@ -13,7 +13,7 @@ const StyledHeading = styled.h2`
 `;
 
 const StyledP = styled.p`
-  color: ${props => props.theme.typography.scribe.color};
+  color: #555;
   font-family: ${props => props.theme.typography.fontFamily};
   line-height: ${props => props.theme.typography.scribe.lineHeight};
   margin: 0;
@@ -21,7 +21,7 @@ const StyledP = styled.p`
 `;
 
 const StyledLi = styled.li`
-  color: ${props => props.theme.typography.scribe.color};
+  color: #555;
   font-family: ${props => props.theme.typography.fontFamily};
   line-height: ${props => props.theme.typography.scribe.lineHeight};
 `;
