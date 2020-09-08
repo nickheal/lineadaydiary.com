@@ -1,8 +1,8 @@
 import { styled } from '../theme/index';
 
 export default styled.input`
-  border: solid 2px ${props => props.theme.palette.primaryHover};
-  border-radius: 8px;
+  border: 0;
+  border-bottom: solid 2px ${props => props.theme.palette.primary};
   display: block;
   font-family: ${props => props.theme.typography.fontFamily};
   font-size: 16px;

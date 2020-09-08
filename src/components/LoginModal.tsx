@@ -1,4 +1,5 @@
 import React from 'react';
+import { navigate } from 'gatsby';
 import Modal from './Modal';
 import LoginForm from './LoginForm';
 import SignUpForm from './SignUpForm';
@@ -10,10 +11,15 @@ interface Props {
 export default function LoginPopup({
   onClose
 }: Props) {
+  function onLogIn() {
+    onClose();
+    navigate('/write');
+  }
+
   return (
     <Modal onClose={onClose}>
-      <LoginForm onLogIn={onClose} />
-      <SignUpForm onSignUp={onClose} />
+      <LoginForm onLogIn={onLogIn} />
+      <SignUpForm onSignUp={onLogIn} />
     </Modal>
   );
 }

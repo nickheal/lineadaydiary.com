@@ -40,11 +40,23 @@ const StyledLink = styled(Link)`
   font-family: ${props => props.theme.typography.fontFamily};
   font-size: 16px;
   padding: 13px 24px;
+  position: relative;
   text-decoration: none;
   transition: background-color 100ms ease-in-out;
 
   &:hover {
     background-color: #f0f0f0;
+  }
+
+  &.active {
+    &::after {
+      background: ${props => props.theme.palette.primaryHover};
+      content: "";
+      display: block;
+      height: 2px;
+      position: absolute;
+      width: calc(100% - 48px);
+    }
   }
 `;
 
@@ -88,16 +100,16 @@ export default function Layout() {
           <FiXCircle size={32} strokeWidth={1} />
           <VisuallyHidden>Close navigation</VisuallyHidden>
         </MenuCloseButton>
-        <StyledLink to="/">Home</StyledLink>
+        <StyledLink activeClassName="active" to="/">Home</StyledLink>
         {isLoggedIn ? (
-          <StyledLink to="/write">
+          <StyledLink activeClassName="active" to="/write">
             <IconAndText>
               <FiPenTool />
               Write
             </IconAndText>
           </StyledLink>
         ) : null}
-        <StyledLink to="/about">About</StyledLink>
+        <StyledLink activeClassName="active" to="/about">About</StyledLink>
         {isLoggedIn ? null : (
           <Button onClick={() => setLoginPopup(true)}>
             <IconAndText>
