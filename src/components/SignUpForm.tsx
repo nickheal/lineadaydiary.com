@@ -35,9 +35,9 @@ export default function LoginPopup({
     <Form onSubmit={onSubmit}>
       <Legend>or register</Legend>
       <Label htmlFor="email">E-mail</Label>
-      <Input name="email" required />
+      <Input name="email" required type="email" />
       <Label htmlFor="password">Password</Label>
-      <Input name="password" required />
+      <Input name="password" required type="password" />
       <Button>
         <IconAndText>
           <FiUserPlus />

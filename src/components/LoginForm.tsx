@@ -52,6 +52,7 @@ export default function LoginPopup({
         name="email"
         onChange={e => onInputChange(e, setEmail)}
         required
+        type="email"
         value={email}
       />
       <Label htmlFor="password">Password</Label>
@@ -59,6 +60,7 @@ export default function LoginPopup({
         name="password"
         onChange={e => onInputChange(e, setPassword)}
         required
+        type="password"
         value={password}
       />
       <Button aria-busy={loading} disabled={loading} type="submit">

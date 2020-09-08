@@ -20,6 +20,12 @@ const StyledP = styled.p`
   margin-bottom: 16px;
 `;
 
+const StyledLi = styled.li`
+  color: ${props => props.theme.typography.scribe.color};
+  font-family: ${props => props.theme.typography.fontFamily};
+  line-height: ${props => props.theme.typography.scribe.lineHeight};
+`;
+
 export default function About() {
   return (
     <Layout>
@@ -36,27 +42,27 @@ export default function About() {
           (feel free to go and thank them on twitter if you like).
         </StyledP>
         <ul>
-          <li>
+          <StyledLi>
             <Link href="https://www.netlify.com/" target="_BLANK">Netlify</Link>
             {' '}
             (
             <Link href="https://twitter.com/Netlify" target="_BLANK">@Netlify</Link>
             )
-          </li>
-          <li>
+          </StyledLi>
+          <StyledLi>
             <Link href="https://fauna.com/" target="_BLANK">Fauna</Link>
             {' '}
             (
             <Link href="https://twitter.com/fauna" target="_BLANK">@fauna</Link>
             )
-          </li>
-          <li>
+          </StyledLi>
+          <StyledLi>
             <Link href="https://github.com/" target="_BLANK">GitHub</Link>
             {' '}
             (
             <Link href="https://twitter.com/github" target="_BLANK">@github</Link>
             )
-          </li>
+          </StyledLi>
         </ul>
         <StyledP>
           If user numbers increase it may become impossible to keep running the site on 'free-tiers' of these services.<br />
@@ -65,10 +71,10 @@ export default function About() {
           I don't have the answers right now to how that would work, but below is a list of options, in my current order of preference:<br />
         </StyledP>
         <ol>
-          <li>Voluntary donations / charity funding</li>
-          <li>Paid extras</li>
-          <li>Advertising</li>
-          <li>Subscriptions</li>
+          <StyledLi>Voluntary donations / charity funding</StyledLi>
+          <StyledLi>Paid extras</StyledLi>
+          <StyledLi>Advertising</StyledLi>
+          <StyledLi>Subscriptions</StyledLi>
         </ol>
         <StyledP>
           The one thing that I can guarantee is that <strong>your personal data is yours</strong>.<br />
@@ -109,8 +115,9 @@ export default function About() {
           Some possible paths are listed below:
         </StyledP>
         <ul>
-          <li>Add self-service account recovery (reset password link).</li>
-          <li>PWA functionality. This means you can install the website on your phone—like an app—and use some of the features offline.</li>
+          <StyledLi>Add self-service account recovery (reset password link).</StyledLi>
+          <StyledLi>Add SSO. This would allow you to sign-up/sign-in with accounts you already have with other providers (eg. Facebook, Google, etc.)</StyledLi>
+          <StyledLi>PWA functionality. This means you can install the website on your phone—like an app—and use some of the features offline.</StyledLi>
         </ul>
       </Container>
     </Layout>
