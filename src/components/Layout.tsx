@@ -1,8 +1,8 @@
 import React from 'react';
 import { Global, css } from '@emotion/core';
 import { ThemeProvider } from 'emotion-theming';
-import { Helmet } from 'react-helmet';
 import Nav from './Nav';
+import Seo from './Seo';
 import theme, { styled } from '../theme/index';
 
 interface Props {
@@ -37,10 +37,7 @@ export default function Layout({
 }: Props) {
   return (
     <ThemeProvider theme={theme}>
-      <Helmet
-        htmlAttributes={{ lang: 'en-gb' }}
-        title="lineadaydiary.com. Write for you."
-      />
+      <Seo />
       <Global styles={globalStyles} />
       <Nav />
       <StyledMain>
