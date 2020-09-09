@@ -37,7 +37,7 @@ function getCalendarDay(date: Date, records: RecordType[] | undefined) {
 
   return [
     getBlankDay(date),
-    thisCalendarDay
+    ...thisCalendarDay
   ];
 }
 
