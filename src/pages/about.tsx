@@ -31,12 +31,16 @@ export default function About() {
     <Layout>
       <Container>
         <StyledHeading>About</StyledHeading>
-        <StyledP>lineadaydiary.com is designed...</StyledP>
+        <StyledP>
+          lineadaydiary.com is designed to be a simple journalling tool with a clean interface, so that
+          you can focus on what you want to write.<br />
+          Input is limited to 250 characters to help prevent it becoming onerous to maintain.
+        </StyledP>
 
         <StyledHeading>Why, and how it's free</StyledHeading>
         <StyledP>
           The aim is to keep lineadaydiary.com free, and open-source forever.<br />
-          This is important due to the potential mental health benefits of journalling.<br />
+          This is important due to the potential mental health benefits of journalling<sup>[<Link href="#ref-1">1-5</Link>]</sup>.<br />
           I don't generate any income from this site.<br />
           Running it is only possible thanks to some amazing services which offer free infrastructure
           (feel free to go and thank them on twitter if you like).
@@ -120,6 +124,15 @@ export default function About() {
           <StyledLi>Add open-source internationalisation. This would let volunteers contribute local language translations for elements of the UI.</StyledLi>
           <StyledLi>PWA functionality. This means you can install the website on your phone—like an app—and use some of the features offline.</StyledLi>
         </ul>
+
+        <StyledHeading>References</StyledHeading>
+        <ol>
+          <StyledLi><Link id="ref-1" href="https://www.mind.org.uk/information-support/your-stories/journal-to-self-love/">https://www.mind.org.uk/information-support/your-stories/journal-to-self-love/</Link></StyledLi>
+          <StyledLi><Link id="ref-2" href="https://www.researchgate.net/profile/Philip_Ullrich/publication/11212874_Journaling_about_stressful_events_Effects_of_cognitive_processing_and_emotional_expression/links/0fcfd5090027dd0d0a000000.pdf">https://www.researchgate.net/profile/Philip_Ullrich/publication/11212874_Journaling_about_stressful_events_Effects_of_cognitive_processing_and_emotional_expression/links/0fcfd5090027dd0d0a000000.pdf</Link></StyledLi>
+          <StyledLi><Link id="ref-3" href="https://positivepsychology.com/benefits-of-journaling/">https://positivepsychology.com/benefits-of-journaling/</Link></StyledLi>
+          <StyledLi><Link id="ref-4" href="https://www.self.com/story/how-to-start-a-journaling-practice">https://www.self.com/story/how-to-start-a-journaling-practice</Link></StyledLi>
+          <StyledLi><Link id="ref-5" href="https://www.sciencedirect.com/science/article/abs/pii/S0260691718303113">https://www.sciencedirect.com/science/article/abs/pii/S0260691718303113</Link></StyledLi>
+        </ol>
       </Container>
     </Layout>
   );
