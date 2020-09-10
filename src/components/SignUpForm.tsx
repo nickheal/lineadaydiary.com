@@ -38,7 +38,7 @@ export default function LoginPopup({
       <Input name="email" required type="email" />
       <Label htmlFor="password">Password</Label>
       <Input name="password" required type="password" />
-      <Button>
+      <Button data-testid="signupform-sign-up" type="submit">
         <IconAndText>
           <FiUserPlus />
           sign up

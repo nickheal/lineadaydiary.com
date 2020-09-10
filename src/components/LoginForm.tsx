@@ -63,7 +63,7 @@ export default function LoginPopup({
         type="password"
         value={password}
       />
-      <Button aria-busy={loading} disabled={loading} type="submit">
+      <Button aria-busy={loading} data-testid="loginform-log-in" disabled={loading} type="submit">
         <IconAndText>
           <FiLogIn />
           log in

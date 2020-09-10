@@ -120,7 +120,7 @@ export default function Layout() {
         ) : null}
         <StyledLink activeClassName="active" to="/about">About</StyledLink>
         {isLoggedIn ? null : (
-          <NavButton onClick={() => setLoginPopup(true)}>
+          <NavButton data-testid="nav-log-in" onClick={() => setLoginPopup(true)}>
             <IconAndText>
               <FiLogIn />
               Log in
