@@ -99,9 +99,9 @@ interface Indicator {
 
 const StyledIndicator = styled(FiChevronDown)<Indicator>`
   bottom: 100%;
-  left: ${props => (props.dayNumber / 365) * 100}%;
+  left: ${props => ((props.dayNumber - 1) / 365) * 100}%;
   position: absolute;
-  transform: translateX(-10px);
+  transform: translateX(-50%);
   transition: left 100ms ease-in-out;
 `;
 

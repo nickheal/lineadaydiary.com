@@ -3,13 +3,12 @@ import { useTheme } from 'emotion-theming';
 import { styled } from '../theme/index';
 import { Record } from '../models/records';
 
-function getDayOutOf365(day, month, year) {
-  var now = new Date(year, month, day);
-  var start = new Date(now.getFullYear(), 0, 0);
-  var diff = now - start;
-  var oneDay = 1000 * 60 * 60 * 24;
-  var day = Math.floor(diff / oneDay);
-  return day;
+function getDayOutOf366(day: number, month: number, year: number) {
+  const now = new Date(year, month, day);
+  const start = new Date(now.getFullYear(), 0, 0);
+  const diff = now.getTime() - start.getTime();
+  const oneDay = 1000 * 60 * 60 * 24;
+  return Math.floor(diff / oneDay) - 1;
 }
 
 const Container = styled.section`
@@ -36,7 +35,7 @@ export default function RecordsTimeline({
   records = []
 }: Props) {
   const theme = useTheme();
-  const canvas = useRef();
+  const canvas = useRef<HTMLCanvasElement>();
 
   useEffect(() => {
     if (!canvas?.current?.getContext) {
@@ -49,7 +48,7 @@ export default function RecordsTimeline({
     const currentYear = new Date().getFullYear();
     records.map(({ day, month, year }) => {
       ctx.globalAlpha = 1 - ((currentYear - year) / 10);
-      ctx.fillRect((getDayOutOf365(day, month, year) / 365) * RESOLUTION, (currentYear - year) * 20, RESOLUTION / 500, 15);
+      ctx.fillRect((getDayOutOf366(day, month, year) / 366) * RESOLUTION, (currentYear - year) * 20, RESOLUTION / 500, 15);
     });
     return () => {
       ctx.clearRect(0, 0, canvasEl.width, canvasEl.height);
