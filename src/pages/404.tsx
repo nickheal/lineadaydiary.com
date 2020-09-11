@@ -2,8 +2,7 @@ import React from 'react';
 import { styled } from '../theme/index';
 import Layout from '../components/Layout';
 import Container from '../components/Container';
-import demo from './demo.gif';
-import demo2x from './demo@2x.gif';
+import Link from '../components/Link';
 
 const Title = styled.h1`
   font-family: ${props => props.theme.typography.fontFamily};
@@ -21,16 +20,8 @@ const SubTitle = styled.h2`
   text-align: center;
 `;
 
-const Image = styled.img`
-  border-radius: 4px;
-  box-shadow: 1px 1px 10px rgba(0,0,0,0.1);
-  margin-bottom: 60px;
-  max-width: 100%;
-`;
-
 const Para = styled.p`
   font-family: ${props => props.theme.typography.fontFamily};
-  line-height: 1.4;
   margin-top: 0;
   text-align: center;
 `;
@@ -39,20 +30,11 @@ export default function Home() {
   return (
     <Layout>
       <Container>
-        <Title>lineadaydiary.com</Title>
-        <SubTitle>Write for you.</SubTitle>
-        <Image
-          srcSet={`${demo}, ${demo2x} 2x`}
-          src={demo}
-          alt="Demo gif"
-        />
+        <Title>404</Title>
+        <SubTitle>We're sorry, this page couldn't be found.</SubTitle>
         <Para>
-          In the modern world we are inundated with websites that let us write
-          with the focus on impressing other people.
-        </Para>
-        <Para>
-          Keeping a line-a-day diary for yourself could be a mental-health
-          antidote to social media.
+          Please use the navigation links at the top, or
+          return to the <Link href="/">Home page</Link> to try again.
         </Para>
       </Container>
     </Layout>
