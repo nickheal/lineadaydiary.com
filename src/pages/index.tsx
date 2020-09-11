@@ -30,8 +30,10 @@ const SubTitle = styled.h2`
 const Image = styled.img`
   border-radius: 4px;
   box-shadow: 1px 1px 10px rgba(0,0,0,0.075);
-  margin-bottom: 60px;
-  max-width: 100%;
+  display: block;
+  margin: 0 auto 60px;
+  max-width: 1024px;
+  width: 100%;
 `;
 
 const Para = styled.p`
@@ -52,11 +54,13 @@ export default function Home() {
       <Container>
         <Title>lineadaydiary.com</Title>
         <SubTitle>Write, for you.</SubTitle>
-        <Image
-          srcSet={`${demo}, ${demo2x} 2x`}
-          src={demo}
-          alt="Demo gif"
-        />
+      </Container>
+      <Image
+        srcSet={`${demo}, ${demo2x} 2x`}
+        src={demo}
+        alt="Demo gif"
+      />
+      <Container>
         <Para>
           In the modern world we are inundated with websites that let us write
           with the focus on presenting ourselves to other people.

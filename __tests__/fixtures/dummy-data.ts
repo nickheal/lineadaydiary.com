@@ -26,7 +26,7 @@ const DUMMY_SENTENCES = [
   '"Do not go where the path may lead, go instead where there is no path and leave a trail." -Ralph Waldo Emerson',
 ];
 
-export default function generateDummyData() {
+export function complete() {
   return new Array(2081).fill(0).map((_, i) => {
     const content = DUMMY_SENTENCES[Math.floor(Math.random() * DUMMY_SENTENCES.length)];
     const date = new Date(1420070400000 + (i * 86400000));
@@ -37,4 +37,13 @@ export default function generateDummyData() {
       year: date.getFullYear()
     }
   });
+}
+
+export function random() {
+  const full = complete();
+  const toDelete = Math.random() * (full.length / 1.5);
+  for (let i = 0; i < toDelete; i++) {
+    full.splice(Math.random() * full.length, 1);
+  }
+  return full;
 }

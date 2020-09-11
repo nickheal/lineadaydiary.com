@@ -9,8 +9,8 @@ interface Props {
   onChange: (newDate: Date) => void
 }
 
-const StyledContainer = styled.div`
-  margin-bottom: 60px;
+const StyledContainer = styled.section`
+  margin-bottom: 4px;
   padding: 0 16px;
   width: 100%;
 `;

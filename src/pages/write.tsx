@@ -9,6 +9,7 @@ import Banner from '../components/Banner';
 import Record from '../components/Record';
 import RecordForm from '../components/RecordForm';
 import Timeline from '../components/Timeline';
+import RecordsTimeline from '../components/RecordsTimeline';
 
 const StyledP = styled.p`
   color: #555;
@@ -101,6 +102,7 @@ export default function Write() {
   return (
     <Layout>
       <Timeline date={date} onChange={setDate} />
+      <RecordsTimeline records={records} />
       <Container>
         {error ? <Banner>{ error }</Banner> : null}
         <RecordForm
