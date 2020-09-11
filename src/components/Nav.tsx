@@ -114,7 +114,7 @@ export default function Layout() {
           <StyledLink activeClassName="active" to="/write">
             <IconAndText>
               <FiPenTool />
-              Write
+              write
             </IconAndText>
           </StyledLink>
         ) : null}
@@ -123,7 +123,7 @@ export default function Layout() {
           <NavButton data-testid="nav-log-in" onClick={() => setLoginPopup(true)}>
             <IconAndText>
               <FiLogIn />
-              Log in
+              log in
             </IconAndText>
           </NavButton>
         )}
@@ -131,7 +131,7 @@ export default function Layout() {
           <NavButton onClick={() => logoutUser()}>
             <IconAndText>
               <FiLogOut />
-              Log out
+              log out
             </IconAndText>
           </NavButton>
         ) : null}

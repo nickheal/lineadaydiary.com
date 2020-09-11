@@ -11,7 +11,7 @@ interface Props {
 
 const StyledContainer = styled.section`
   margin-bottom: 4px;
-  padding: 0 16px;
+  padding: 0 4px;
   width: 100%;
 `;
 
@@ -64,33 +64,9 @@ const StyledDate = styled.p`
 
 const StyledTimeline = styled.div`
   display: block;
-  height: 20px;
+  height: 0;
   position: relative;
   width: 100%;
-`;
-
-interface Week {
-  left: number
-}
-
-const StyledWeek = styled.div<Week>`
-  border-left: solid 1px #e0e0e0;
-  bottom: 0;
-  height: 75%;
-  left: ${props => props.left * (100 / 52)}%;
-  position: absolute;
-`;
-
-interface Day {
-  left: number
-}
-
-const StyledDay = styled.div<Day>`
-  border-left: solid 1px #e0e0e0;
-  bottom: 0;
-  height: 25%;
-  left: ${props => props.left * (100 / 365)}%;
-  position: absolute;
 `;
 
 interface Indicator {
@@ -107,8 +83,8 @@ const StyledIndicator = styled(FiChevronDown)<Indicator>`
 
 const months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
-function daysIntoYear(date: Date) {
-  return (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) - Date.UTC(date.getFullYear(), 0, 0)) / 24 / 60 / 60 / 1000;
+function daysIntoLeapYear(date: Date) {
+  return (Date.UTC(2020, date.getMonth(), date.getDate()) - Date.UTC(2020, 0, 0)) / 24 / 60 / 60 / 1000;
 }
 
 function nth(d: number) {
@@ -151,9 +127,7 @@ export default function Timeline({
         </StyledButtonRight>
       </StyledDateContainer>
       <StyledTimeline>
-        <StyledIndicator color={primaryHover} dayNumber={daysIntoYear(date)} size={24} />
-        {new Array(52).fill(0).map((_, index) => <StyledWeek key={index} left={index} />)}
-        {new Array(365).fill(0).map((_, index) => <StyledDay key={index} left={index} />)}
+        <StyledIndicator color={primaryHover} dayNumber={daysIntoLeapYear(date)} size={24} />
       </StyledTimeline>
     </StyledContainer>
   );

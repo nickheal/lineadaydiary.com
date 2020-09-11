@@ -24,6 +24,7 @@ const StyledLi = styled.li`
   color: #555;
   font-family: ${props => props.theme.typography.fontFamily};
   line-height: ${props => props.theme.typography.scribe.lineHeight};
+  margin-bottom: 8px;
 `;
 
 export default function About() {

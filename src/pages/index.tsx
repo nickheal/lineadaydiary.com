@@ -28,7 +28,7 @@ const SubTitle = styled.h2`
 `;
 
 const Image = styled.img`
-  border-radius: 4px;
+  border-radius: 8px;
   box-shadow: 1px 1px 10px rgba(0,0,0,0.075);
   display: block;
   margin: 0 auto 60px;
@@ -67,7 +67,7 @@ export default function Home() {
         </Para>
         <Para>
           lineadaydiary.com is a journalling web app that encourages you to write
-          just a short line or sentence to document each day.
+          just a short line or sentence to document each day for yourself.
         </Para>
         <Para>
           Once you've completed a year you&rsquo;ll start seeing the previous
