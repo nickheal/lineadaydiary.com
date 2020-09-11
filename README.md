@@ -1,6 +1,6 @@
 # [LineADayDiary.com](https://lineadaydiary.com)
 
-![Site screenshot](./.github/site-screenshot.png)
+![Site demo](./.github/site-demo.gif)
 
 ## 🚀 Quick start
 

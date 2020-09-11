@@ -56,7 +56,7 @@ module.exports = {
     )
   },
   siteMetadata: {
-    title: 'lineadaydiary.com. Write for you.',
+    title: 'lineadaydiary.com. Write, for you.',
     titleTemplate: '%s · ...',
     description: 'LineADayDiary.com is a free line a day diary site where you can write a short, private journal entry that will get echoed back to you as time goes on. It is open-source, and community-driven.',
     url: 'https://lineadaydiary.com',

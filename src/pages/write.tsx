@@ -11,7 +11,9 @@ import RecordForm from '../components/RecordForm';
 import Timeline from '../components/Timeline';
 
 const StyledP = styled.p`
+  color: #555;
   font-family: ${props => props.theme.typography.fontFamily};
+  line-height: 1.4;
   text-align: center;
 `;
 

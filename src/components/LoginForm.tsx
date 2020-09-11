@@ -46,7 +46,7 @@ export default function LoginPopup({
 
   return (
     <Form onSubmit={onSubmit}>
-      <Legend>Sign-in</Legend>
+      <Legend>Log in</Legend>
       <Label htmlFor="email">E-mail</Label>
       <Input
         name="email"

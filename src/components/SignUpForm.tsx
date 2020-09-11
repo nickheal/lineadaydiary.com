@@ -33,7 +33,7 @@ export default function LoginPopup({
 
   return (
     <Form onSubmit={onSubmit}>
-      <Legend>or register</Legend>
+      <Legend>or sign up</Legend>
       <Label htmlFor="email">E-mail</Label>
       <Input name="email" required type="email" />
       <Label htmlFor="password">Password</Label>
