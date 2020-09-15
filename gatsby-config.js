@@ -7,6 +7,8 @@ const createProxyMiddleware = require('http-proxy-middleware');
 
 module.exports = {
   plugins: [
+    'gatsby-plugin-robots-txt',
+    'gatsby-plugin-sitemap',
     'gatsby-plugin-react-helmet',
     {
       resolve: 'gatsby-plugin-netlify-identity',
@@ -56,10 +58,10 @@ module.exports = {
     )
   },
   siteMetadata: {
-    title: 'lineadaydiary.com. Write, for you.',
-    titleTemplate: '%s · ...',
-    description: 'LineADayDiary.com is a free line a day diary site where you can write a short, private journal entry that will get echoed back to you as time goes on. It is open-source, and community-driven.',
-    url: 'https://lineadaydiary.com',
+    title: 'Line A Day Diary. Write, for you.',
+    titleTemplate: '%s',
+    description: 'Line A Day Diary is a free online web app where you can write a short, private journal entry that will get reflected back to you as time goes on. It is open-source, and community-driven.',
+    siteUrl: 'https://lineadaydiary.com',
     image: '/favicon.ico',
     twitterUsername: '@nickhealweb'
   }
