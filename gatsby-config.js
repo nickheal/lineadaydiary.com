@@ -13,7 +13,7 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-netlify-identity',
       options: {
-        url: 'https://lineadaydiary.com'
+        url: 'https://lineadaydiary.netlify.app'
       }
     },
     {
@@ -27,8 +27,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: 'lineadaydiary.com',
-        short_name: 'lineadaydiary.com',
+        name: 'lineadaydiary.netlify.app',
+        short_name: 'lineadaydiary.netlify.app',
         start_url: '/',
         background_color: '#dbf3ed',
         theme_color: '#dbf3ed',
@@ -61,7 +61,7 @@ module.exports = {
     title: 'Line A Day Diary. Write, for you.',
     titleTemplate: '%s',
     description: 'Line A Day Diary is a free online web app where you can write a short, private journal entry that will get reflected back to you as time goes on. It is open-source, and community-driven.',
-    siteUrl: 'https://lineadaydiary.com',
+    siteUrl: 'https://lineadaydiary.netlify.app',
     image: '/favicon.ico',
     twitterUsername: '@nickhealweb'
   }

@@ -1,4 +1,4 @@
-# [LineADayDiary.com](https://lineadaydiary.com)
+# [lineadaydiary.netlify.app](https://lineadaydiary.netlify.app)
 
 ![Site demo](./.github/site-demo.gif)
 
@@ -10,13 +10,13 @@ As this is a serverless application there are a couple of services you will need
 
 For auth you need to sign up with Netlify. To do this go to [netlify.com](https://www.netlify.com/), and sign up for a free account, then create a website.
 
-If you've forked this repository then you can get Netlify to create a site using your Git repository, otherwise you can drag a site folder on to Netlify. You don't actually need their hosting, but you do need to create the site so that you can use their Identity service. Once created, click on the Identity tab. This will tell you your Identity API end-point. Copy that (ignoring the `/.netlify/identity` part), and paste it over `https://lineadaydiary.com` in your [Gatsby config](./gatsby-config.js).
+If you've forked this repository then you can get Netlify to create a site using your Git repository, otherwise you can drag a site folder on to Netlify. You don't actually need their hosting, but you do need to create the site so that you can use their Identity service. Once created, click on the Identity tab. This will tell you your Identity API end-point. Copy that (ignoring the `/.netlify/identity` part), and paste it over `https://lineadaydiary.netlify.app` in your [Gatsby config](./gatsby-config.js).
 
 ```javascript
 {
   resolve: 'gatsby-plugin-netlify-identity',
   options: {
-    url: 'https://lineadaydiary.com'
+    url: 'https://lineadaydiary.netlify.app'
   }
 }
 ```

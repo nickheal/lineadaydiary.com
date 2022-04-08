@@ -33,14 +33,14 @@ export default function About() {
       <Container>
         <StyledHeading>About</StyledHeading>
         <StyledP>
-          lineadaydiary.com is designed to be a simple journalling tool with a clean interface, so that
+          lineadaydiary.netlify.app is designed to be a simple journalling tool with a clean interface, so that
           you can focus on what you want to write.<br />
           Input is limited to 250 characters to help prevent it becoming onerous to maintain.
         </StyledP>
 
         <StyledHeading>Why, and how it's free</StyledHeading>
         <StyledP>
-          The aim is to keep lineadaydiary.com free, and open-source forever.<br />
+          The aim is to keep lineadaydiary.netlify.app free, and open-source forever.<br />
           This is important due to the potential mental health benefits of journalling<sup>[<Link href="#ref-1">1-5</Link>]</sup>.<br />
           I don't generate any income from this site.<br />
           Running it is only possible thanks to some amazing services which offer free infrastructure
@@ -88,7 +88,7 @@ export default function About() {
 
         <StyledHeading>The technical stuff</StyledHeading>
         <StyledP>
-          lineadaydiary.com is an open-source project.
+          lineadaydiary.netlify.app is an open-source project.
           This means <em>you</em> can influence the direction it goes in.
           To file an issue, or request a feature, please use the
           {' '}

@@ -52,7 +52,7 @@ export default function Home() {
   return (
     <Layout>
       <Container>
-        <Title>lineadaydiary.com</Title>
+        <Title>lineadaydiary.netlify.app</Title>
         <SubTitle>Write, for you.</SubTitle>
       </Container>
       <Image
@@ -66,7 +66,7 @@ export default function Home() {
           with the focus on presenting ourselves to other people.
         </Para>
         <Para>
-          lineadaydiary.com is a journalling web app that encourages you to write
+          lineadaydiary.netlify.app is a journalling web app that encourages you to write
           just a short line or sentence to document each day for yourself.
         </Para>
         <Para>
